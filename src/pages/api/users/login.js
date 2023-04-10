@@ -1,10 +1,34 @@
-import { connectDb } from "../../../../database/connectDb";
-// import Users from "../../../../models/users";
+import Users from "../../../../models/users";
+import connectDb from "../../../../middlewares/connectDb";
+import bcrypt from "bcrypt"
+import { sendToken } from "../../../../utils/token";
 
-const login = async (req, res) => {
-    res.status({
-        status: "Login"
-    })
+const handler = async (req, res) => {
+    if (req.method === "POST") {
+        const { email, password } = req.body
+
+        try {
+
+            const user = await Users.findOne({ email })
+
+            if (!user) {
+                res.status(400).json({ success: false, message: "Email-id or password is invailid" })
+            }
+
+            const verifyPassword = bcrypt.compare(password, user.password)
+
+            if (!verifyPassword) {
+                return res.status(404).json({ success: false, message: "Email-id or password is invailid" })
+            }
+
+            sendToken(user, res, "Login Succussfully......", 200)
+
+        } catch (error) {
+
+        }
+    } else {
+        res.status(404).json({ message: "Invalid request" })
+    }
 }
 
-export default login
+export default connectDb(handler)
