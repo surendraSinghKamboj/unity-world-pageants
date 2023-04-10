@@ -75,7 +75,9 @@ export default function Home() {
 			{/* carousel */}
 			<Carosel />
 			{/* under carosel */}
-			<GrandFamily />
+			<div className="w-[80%] m-auto">
+				<GrandFamily />
+			</div>
 		</>
 	);
 }

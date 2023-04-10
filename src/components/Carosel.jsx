@@ -33,8 +33,11 @@ export default function App() {
 				{carosel &&
 					carosel.map((item, index) => {
 						return (
-							<SwiperSlide key={index} className="swiper-slide rounded-2xl mt-4 mb-4">
-								<Image alt="carosel" className="p-5" src={item} />
+							<SwiperSlide
+								key={index}
+								className="swiper-slide rounded-2xl mt-4 mb-4"
+							>
+								<Image alt="carousel" className="p-5" src={item} />
 							</SwiperSlide>
 						);
 					})}

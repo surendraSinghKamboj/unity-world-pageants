@@ -11,17 +11,19 @@ import {
 	AiOutlineClose,
 	AiOutlineMenu,
 } from "react-icons/ai";
+import LoginRegister from "./LoginRegister";
 
 const Navbar = () => {
 	const [lanMenu, setLanMenu] = useState(false);
 	const [language, setLanguage] = useState("English");
 	const [open, setOpen] = useState(false);
+	const [dialog, setDialog] = useState(false);
 	const lan = ["English", "Hindi", "Indonasian", "Korean", "Chinease"];
 	return (
 		<motion.div
 			initial={{ y: "-400px" }}
 			animate={{ y: 0 }}
-			className="bg-[#350200] z-10 sticky top-0"
+			className="bg-[#350200] z-10"
 		>
 			<div className="flex justify-between m-auto items-center w-[90%]">
 				{/* Logo in below div */}
@@ -58,7 +60,7 @@ const Navbar = () => {
 					</div>
 					{/* login / register button */}
 					<div>
-						<button className="bg-white hidden md:block md:w-32 px-2 md:hover:opacity-80 md:my-1">
+						<button className="bg-white hidden md:block md:w-32 px-2 md:hover:opacity-80 md:my-1" onClick={()=>setDialog(true)}>
 							Login / Register
 						</button>
 					</div>
@@ -93,6 +95,7 @@ const Navbar = () => {
 				</div>
 			</div>
 			<Navlinks display={open} />
+			{dialog ? <LoginRegister close={setDialog} /> : null}
 		</motion.div>
 	);
 };
