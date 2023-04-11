@@ -28,10 +28,13 @@ export default function Home() {
 				<div className="flex-col md:w-[50%] px-2">
 					{/* uppercase heading */}
 					<div className="text-3xl uppercase mt-4">
-						<h3>{'"Welcome to Unity World Pageants"'}</h3>
+						<h3 className="text-center">{'"Welcome to Unity World Pageants"'}</h3>
 					</div>
 					{/* text content of the home page */}
 					<div>
+						<div className="md:w-[50%] md:hidden block  p-4">
+							<Image src={crown} alt="crown"></Image>
+						</div>
 						<p className="mt-2">
 							Welcome to Unity World Pageants - the premier beauty pageant that
 							celebrates diversity, unity, and empowerment of women from around
@@ -68,7 +71,7 @@ export default function Home() {
 						</p>
 					</div>
 				</div>
-				<div className="md:w-[50%] p-4">
+				<div className="md:w-[50%] md:inline hidden p-4">
 					<Image src={crown} alt="crown"></Image>
 				</div>
 			</div>
