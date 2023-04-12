@@ -5,6 +5,7 @@ import crown from "../assets/crown.jpg";
 import Image from "next/image";
 import Carosel from "@/components/Carosel";
 import GrandFamily from "@/components/GrandFamily";
+import Campaign from "@/components/Campaign";
 
 export default function Home() {
 	return (
@@ -35,7 +36,7 @@ export default function Home() {
 						<div className="md:w-[50%] md:hidden block  p-4">
 							<Image src={crown} alt="crown"></Image>
 						</div>
-						<p className="mt-2">
+						<p className="mt-2 text-justify">
 							Welcome to Unity World Pageants - the premier beauty pageant that
 							celebrates diversity, unity, and empowerment of women from around
 							the world. Our pageant is more than just a competition, it is a
@@ -44,7 +45,7 @@ export default function Home() {
 							sisterhood.
 						</p>
 						<br />
-						<p>
+						<p className="text-justify">
 							At Unity World Pageants, we believe that every woman has a unique
 							story to tell and a voice that deserves to be heard. We strive to
 							create an inclusive environment that celebrates diversity in all
@@ -75,6 +76,10 @@ export default function Home() {
 					<Image src={crown} alt="crown"></Image>
 				</div>
 			</div>
+
+			{/* Campagin */}
+			<Campaign />
+
 			{/* carousel */}
 			<Carosel />
 			{/* under carosel */}

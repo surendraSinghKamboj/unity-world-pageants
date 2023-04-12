@@ -14,7 +14,7 @@ const about = () => {
 					About us
 				</h3>
 				<div className="w-[80%] m-auto">
-					<p className="text-slate-50 ">
+					<p className="text-slate-50 text-justify">
 						Unity World Pageants is a International beauty pageant franchise
 						owned by Munporgindiapvt Ltd, a company based in India. The pageant
 						aims to promote diversity, inclusivity, and empowerment of women
