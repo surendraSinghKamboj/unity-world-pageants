@@ -15,17 +15,19 @@ const about = () => {
 				</h3>
 				<div className="w-[80%] m-auto">
 					<p className="text-slate-50 text-justify">
-						Unity World Pageants is a International beauty pageant franchise
-						owned by Munporgindiapvt Ltd, a company based in India. The pageant
-						aims to promote diversity, inclusivity, and empowerment of women
-						from all walks of life across the world. The competition focuses on
-						more than just physical beauty, but also on the contestants'
-						intelligence, personality, and talent. Through various rounds of
-						competition, the pageant provides a platform for women to showcase
-						their skills, and raise awareness on important social causes. With
-						its global presence, Unity World Pageants has become a prominent
-						platform for women to celebrate their beauty, talent, and
-						individuality, while advocating for positive change in society.
+						{`
+							Unity World Pageants is a International beauty pageant franchise
+							owned by Munporgindiapvt Ltd, a company based in India. The pageant
+							aims to promote diversity, inclusivity, and empowerment of women
+							from all walks of life across the world. The competition focuses on
+							more than just physical beauty, but also on the contestants'
+							intelligence, personality, and talent. Through various rounds of
+							competition, the pageant provides a platform for women to showcase
+							their skills, and raise awareness on important social causes. With
+							its global presence, Unity World Pageants has become a prominent
+							platform for women to celebrate their beauty, talent, and
+							individuality, while advocating for positive change in society.
+							`}
 					</p>
 				</div>
 			</div>
