@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
-
+import logo from "../assets/logo.png";
 import axios from "axios";
 import Alert from "./Alert";
+import Image from "next/image";
 
 const Register = () => {
 	const [text, setText] = useState("");
 	const inputs = [
 		{ type: "text", name: "name", placeholder: "Full name" },
 		{ type: "email", name: "email", placeholder: "E-mail" },
-		{ type: "text", name: "mobile", placeholder: "Enter your phone" },
-		{ type: "password", name: "password", placeholder: "Enter Password" },
-		{
-			type: "password",
-			name: "confirmPassword",
-			placeholder: "Re-enter Password",
-		},
+		{ type: "text", name: "mobile", placeholder: "Conatct number" },
 	];
 
 	const [data, setData] = useState({
@@ -33,24 +28,17 @@ const Register = () => {
 	};
 
 	const handleSubmit = async () => {
-		const { name, email, mobile, password, confirmPassword } = data;
-		if (!name || !email || !mobile || !password || !confirmPassword) {
+		const { name, email, mobile, message } = data;
+		if (!name || !email || !mobile || !message) {
 			setText("All feildes are medatory");
-		}
-		if (password !== confirmPassword) {
-			setText("Confirm password mismatch");
-		}
-		if (password.length < 8) {
-			setText("Password too short");
 		} else {
 			try {
-				const response = await axios.post(`/api/users/register`, {
+				const response = await axios.post(`/api/queries/query`, {
 					name,
 					email,
 					mobile,
-					password,
+					message,
 				});
-				console.log(response);
 				setText(response.data.message);
 			} catch (error) {
 				console.log("error");
@@ -65,6 +53,7 @@ const Register = () => {
 
 	return (
 		<>
+			<Image alt="logo" src={logo} width={100} />
 			<Alert text={text} />
 			{inputs &&
 				inputs.map(({ type, name, placeholder }, index) => (
@@ -74,14 +63,21 @@ const Register = () => {
 						placeholder={placeholder}
 						name={name}
 						onChange={(e) => handleChange(e)}
-						className="rounded-full px-2 border-2 mt-2 border-black py-1 w-72"
+						className="rounded-lg px-2 border-2 mt-2 border-white bg-slate-800 py-1 w-72"
 					/>
 				))}
+			<textarea
+				name="message"
+				className="w-72 bg-slate-800 mt-2 px-2 border-white border-2"
+				placeholder="Message"
+				onChange={(e) => handleChange(e)}
+				rows="5"
+			></textarea>
 			<button
-				className="mt-4 border-2 border-[#350200] px-2 rounded-full hover:bg-green-500 hover:text-white"
+				className="mt-4 border-2 px-4 rounded-md py-1 hover:opacity-80 active:bg-green-400 hover:text-white"
 				onClick={handleSubmit}
 			>
-				Register now
+				Submit
 			</button>
 		</>
 	);

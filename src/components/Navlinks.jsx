@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-const Navlinks = ({ display }) => {
+const Navlinks = ({ display, pop }) => {
 	const [hall, setHall] = useState(false);
 
 	const links = [
@@ -69,6 +69,12 @@ const Navlinks = ({ display }) => {
 							</Link>
 						);
 					})}
+				<li
+					className={`text-white md:w-auto w-full text-center hover:opacity-80 uppercase`}
+					onClick={() => pop(true)}
+				>
+					Query
+				</li>
 			</ul>
 		</motion.div>
 	);

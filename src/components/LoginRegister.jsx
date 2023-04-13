@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import Register from "./Register";
+import Query from "./Query";
 import Login from "./Login";
-
 
 const LoginRegister = ({ close }) => {
 	const [part, setPart] = useState("register");
@@ -13,29 +12,29 @@ const LoginRegister = ({ close }) => {
 				className="text-white absolute p-1 cursor-pointer hover:bg-white hover:text-black text-2xl rounded-full right-4 top-4"
 				onClick={() => close(false)}
 			/>
-			<div className="bg-white rounded-md flex flex-col relative justify-center items-center m-auto min-h-[90vh] mt-8 w-[90%] md:w-3/5">
+			<div className="bg-[#350200] text-white rounded-md flex flex-col relative justify-center items-center m-auto min-h-[90vh] mt-8 w-[90%] md:w-1/2">
 				<div className="flex absolute w-full top-3">
 					<div
 						onClick={() => setPart("register")}
-						className={`w-[50%] flex justify-center cursor-pointer`}
+						className={`w-full flex justify-center cursor-pointer`}
 					>
-						<p>Register</p>
+						<p>Submit Your Query</p>
 					</div>
-					<div
+					{/* <div
 						onClick={() => setPart("login")}
 						className={`w-[50%] flex justify-center cursor-pointer`}
 					>
 						<p>Login</p>
-					</div>
+					</div> */}
 				</div>
 				<div className="absolute top-6 w-full h-1">
-					<div
+					{/* <div
 						className={`absolute transition-all duration-300 top-4 w-[50%] ${
 							part === "login" ? "left-[50%]" : "left-0"
 						} h-1 bg-[#920f0a]`}
-					></div>
+					></div> */}
 				</div>
-				{part === "register" ? <Register /> : <Login />}
+				{part === "register" ? <Query /> : <Login />}
 			</div>
 		</div>
 	);

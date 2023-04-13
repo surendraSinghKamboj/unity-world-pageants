@@ -61,7 +61,7 @@ const Navbar = () => {
 					{/* login / register button */}
 					<div>
 						<button className="bg-white hidden md:block md:w-32 px-2 md:hover:opacity-80 md:my-1" onClick={()=>setDialog(true)}>
-							Login / Register
+							Query
 						</button>
 					</div>
 					{/* language options */}
@@ -94,7 +94,7 @@ const Navbar = () => {
 					</div>
 				</div>
 			</div>
-			<Navlinks display={open} />
+			<Navlinks display={open} pop={setDialog}/>
 			{dialog ? <LoginRegister close={setDialog} /> : null}
 		</motion.div>
 	);
