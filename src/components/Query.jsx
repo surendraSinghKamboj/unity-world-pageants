@@ -74,7 +74,7 @@ const Register = () => {
 				rows="5"
 			></textarea>
 			<button
-				className="mt-4 border-2 px-4 rounded-md py-1 hover:opacity-80 active:bg-green-400 hover:text-white"
+				className="mt-4 border-2 shadow-md shadow-white active:translate-y-1 active:shadow-none transition-all duration-500 px-4 rounded-md py-1 hover:opacity-80  hover:text-white"
 				onClick={handleSubmit}
 			>
 				Submit
