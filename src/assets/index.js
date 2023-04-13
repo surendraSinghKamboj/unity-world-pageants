@@ -11,7 +11,17 @@ import slide_japan from "./slide_japan.jpg"
 
 
 
-const carosel = [slide_japan,slide_africa, slide_peru, slide_america, slide_europe, slide_glatema, slide_usa, slide_costarica, slide_srilanka]
+const carosel = [
+    slide_japan,
+    slide_africa, 
+    slide_peru, 
+    slide_america, 
+    slide_europe, 
+    slide_glatema, 
+    slide_usa, 
+    slide_costarica, 
+    slide_srilanka
+]
 export default carosel
 
 
