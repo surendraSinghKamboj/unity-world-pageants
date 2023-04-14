@@ -9,11 +9,10 @@ const Navlinks = ({ display, pop }) => {
 	const links = [
 		{ hyperLink: "/", title: "Home" },
 		{ hyperLink: "/contestents", title: "Contestents" },
-		{ hyperLink: "/competition", title: "Competition" },
+		{ hyperLink: "/category", title: "Category" },
 		{ hyperLink: "/about-uwp", title: "About uwp" },
-		{ hyperLink: "/hall-of-fame", title: `Hall of fame` },
 		{ hyperLink: "/sponsers", title: "sponsers" },
-		{ hyperLink: "/experiences", title: "Experiences" },
+		{ hyperLink: "/registration", title: "Registration" },
 	];
 
 	return (
@@ -25,7 +24,7 @@ const Navlinks = ({ display, pop }) => {
 			<ul
 				className={`m-auto ${
 					display ? "block absolute left-0" : "hidden"
-				} gap-3 w-full bg-[#350200] md:w-[725px] md:static items-center md:flex`}
+				} gap-3 w-full bg-[#350200] md:w-[558px] md:static items-center md:flex`}
 			>
 				{links &&
 					links.length > 0 &&

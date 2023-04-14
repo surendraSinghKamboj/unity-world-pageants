@@ -1,3 +1,13 @@
+// Partners 
+import partner_epublic from '../assets/partner_epublic.jpeg'
+import partner_news_express from '../assets/partner_news_express.jpeg'
+import partner_news_guru from '../assets/partner_news_guru.jpeg'
+import partner_news_horizon from '../assets/partner_news_horizon.jpeg'
+import partner_radiant_news from '../assets/partner_radiant_news.jpeg'
+import partner_rd_times from '../assets/partner_rd_times.jpeg'
+import partner_the_news_watch from '../assets/partner_the_news_watch.jpeg'
+import partner_times_bulletin from '../assets/partner_times_bulletin.jpeg'
+import partner_tribune from '../assets/partner_tribune.jpeg'
 // Slides
 import slide_costarica from "./slide_costarica.jpeg"
 import slide_europe from "./slide_europe.jpeg"
@@ -9,32 +19,27 @@ import slide_usa from "./slide_usa.jpeg"
 import slide_peru from "./slide_peru.jpg"
 import slide_japan from "./slide_japan.jpg"
 
+// Category 
+import miss from "./miss.jpeg"
+import ms from "./ms.jpeg"
+import mrs from "./mrs.jpeg"
+
 
 
 const carosel = [
     slide_japan,
-    slide_africa, 
-    slide_peru, 
-    slide_america, 
-    slide_europe, 
-    slide_glatema, 
-    slide_usa, 
-    slide_costarica, 
+    slide_africa,
+    slide_peru,
+    slide_america,
+    slide_europe,
+    slide_glatema,
+    slide_usa,
+    slide_costarica,
     slide_srilanka
 ]
 export default carosel
 
 
-// Partners 
-import partner_epublic from '../assets/partner_epublic.jpeg'
-import partner_news_express from '../assets/partner_news_express.jpeg'
-import partner_news_guru from '../assets/partner_news_guru.jpeg'
-import partner_news_horizon from '../assets/partner_news_horizon.jpeg'
-import partner_radiant_news from '../assets/partner_radiant_news.jpeg'
-import partner_rd_times from '../assets/partner_rd_times.jpeg'
-import partner_the_news_watch from '../assets/partner_the_news_watch.jpeg'
-import partner_times_bulletin from '../assets/partner_times_bulletin.jpeg'
-import partner_tribune from '../assets/partner_tribune.jpeg'
 
 export const partners_carosel = [
     partner_epublic,
@@ -47,3 +52,7 @@ export const partners_carosel = [
     partner_times_bulletin,
     partner_tribune
 ]
+
+export const category = {
+    miss, ms, mrs
+}

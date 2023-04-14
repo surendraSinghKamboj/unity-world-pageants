@@ -58,7 +58,7 @@ const contestents = () => {
 									className="rounded-xl"
 								/>
 								<p className="text-center">{item.name}</p>
-								<button className="w-full text-center">Vote</button>
+								{/* <button className="w-full text-center">Vote</button> */}
 								<button
 									className="w-full text-center"
 									onClick={() => handleView(item._id)}
@@ -97,15 +97,45 @@ const contestents = () => {
 						</div>
 						<div className="flex">
 							<p className="w-20">Age</p>
-							<p className="ml-3">{viewData.age}</p>
+							<p className="ml-3">{viewData.age} Years</p>
+						</div>
+						<div className="flex">
+							<p className="w-20">Height</p>
+							<p className="ml-3">{viewData.height}cms</p>
 						</div>
 						<div className="flex">
 							<p className="w-20">Occupation</p>
 							<p className="ml-3">{viewData.occupation}</p>
 						</div>
 						<div className="flex">
-							<p className="w-20">Height</p>
-							<p className="ml-3">{viewData.height}cms</p>
+							<p className="w-20">Hobbies</p>
+							<div className="ml-3">
+								{viewData.hobbies &&
+									viewData.hobbies.map((item, index) => (
+										<p key={index}>{item}</p>
+									))}
+							</div>
+						</div>
+						<div className="flex">
+							<p className="w-20">Awards</p>
+							<div className="ml-3">
+								{viewData.awards &&
+									viewData.awards.map((item, index) => (
+										<p key={index}>{item}</p>
+									))}
+							</div>
+						</div>
+						<div className="flex">
+							<p className="w-20">Biography</p>
+							<p className="ml-4">{viewData.biography}</p>
+						</div>
+						<div className="flex">
+							<p className="w-20">Volunteer / Charity Project</p>
+							<p className="ml-4">{viewData.volunteerCharityProject}</p>
+						</div>
+						<div className="flex">
+							<p className="w-28">Reason for entering the pageant</p>
+							<p className="ml-4">{viewData.reasonForEnteringPageant}</p>
 						</div>
 					</div>
 				</motion.div>

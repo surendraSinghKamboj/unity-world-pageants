@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import { motion } from "framer-motion";
+import Image from "next/image";
 import React from "react";
+import aboutImage from '../assets/about.jpeg'
 
 const about = () => {
 	return (
@@ -9,6 +11,7 @@ const about = () => {
 			animate={{ y: 0 }}
 			className="min-h-[90vh]"
 		>
+			<Image alt="About" src={aboutImage} />
 			<div className="flex flex-col justify-center items-center py-52 md:w-[80%] bg-[#350200] mt-20 rounded-r-full">
 				<h3 className="uppercase text-white text-lg font-semibold mb-8 underline-offset-2 underline md:text-left">
 					About us
