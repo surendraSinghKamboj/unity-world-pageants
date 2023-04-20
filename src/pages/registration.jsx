@@ -1,19 +1,48 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import Uploadimage from "@/components/Uploadimage";
 import React, { useState } from "react";
+import logo from "../assets/logo.png";
+import Image from "next/image";
+import { useSelector } from "react-redux";
 
 const registration = () => {
+	const images = useSelector((result) => result.updateImages);
+	const { imgOne, imgTwo, imgThree } = images;
 	const [prefix, setPrefix] = useState("");
 	const [category, setCategory] = useState("");
 	const [openPrefix, setOpenPrefix] = useState(false);
 	const [openCategory, setOpenCategory] = useState(false);
+	const [data, setData] = useState({});
 
-	const handleChange = (e) => {};
-	const handleSubmit = async () => {};
+	const handleChange = (e) => {
+		setData({
+			...data,
+			[e.target.name]: e.target.value,
+		});
+	};
+	const handleSubmit = async (prefix, category) => {
+		if (prefix && category) {
+			const readyData = {
+				prefix: !prefix ? "null" : prefix,
+				category: !category ? "null" : category,
+				...data,
+				imgOne,
+				imgTwo,
+				imgThree,
+			};
+			console.log(readyData);
+		} else {
+			console.log(prefix, category);
+			console.log("there is a error");
+		}
+	};
+
 	return (
-		<div className="flex flex-col bg-[#350200] m-auto my-4 justify-center items-center w-full ">
+		<div className="flex flex-col bg-[#350200] m-auto py-4 justify-center items-center w-full ">
 			<h3 className="mt-4 mb-10 text-white">Entry Form</h3>
-			<div className="md:w-[40%] w-[80%]">
+
+			<Image alt="logo" src={logo} width={100} />
+			<div className="md:w-[40%] mt-20 w-[80%]">
 				<div
 					onClick={() => setOpenPrefix(!openPrefix)}
 					className="cursor-pointer text-white rounded-lg px-2 relative transition-all duration-300 border-white border-2 md:w-[40%] w-[80%]"
@@ -184,7 +213,7 @@ const registration = () => {
 			</div>
 			<button
 				className="mt-4 border-2 shadow-md text-white shadow-white active:translate-y-1 active:shadow-none transition-all duration-500 px-4 rounded-md py-1 hover:opacity-80  hover:text-white"
-				onClick={handleSubmit}
+				onClick={() => handleSubmit(prefix, category)}
 			>
 				Submit
 			</button>

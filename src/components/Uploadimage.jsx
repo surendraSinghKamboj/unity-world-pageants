@@ -1,22 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { VscLoading } from "react-icons/vsc";
+import { useDispatch, useSelector } from "react-redux";
+import { imageFunction } from "../../Store/Features/Images";
 
 const Uploadimage = () => {
-	const [loadingOne, setLoadingOne] = useState(false);
-	const [loadingTwo, setLoadingTwo] = useState(false);
-	const [loadingThree, setLoadingThree] = useState(false);
+	const data = useSelector((result) => result.updateImages);
+	const { imgOne, imgTwo, imgThree } = data;
+
+	const dispatch = useDispatch();
 
 	const handleChange = async (e) => {
-		console.log(e);
+		// event blob converter
+
 		if (e.target.name === "fileOne") {
-			setLoadingOne(true);
+			const file = e.target.files[0];
+			const reader = new FileReader();
+
+			reader.onloadend = () => {
+				dispatch(imageFunction(["imgOne", reader.result]));
+			};
+
+			if (file) {
+				reader.readAsDataURL(file);
+			} else {
+			}
 		}
 		if (e.target.name === "fileTwo") {
-			setLoadingTwo(true);
+			const file = e.target.files[0];
+			const reader = new FileReader();
+
+			reader.onloadend = () => {
+				dispatch(imageFunction(["imgTwo", reader.result]));
+			};
+
+			if (file) {
+				reader.readAsDataURL(file);
+			} else {
+			}
 		}
 		if (e.target.name === "fileThree") {
-			setLoadingThree(true);
+			const file = e.target.files[0];
+			const reader = new FileReader();
+
+			reader.onloadend = () => {
+				dispatch(imageFunction(["imgThree", reader.result]));
+			};
+
+			if (file) {
+				reader.readAsDataURL(file);
+			} else {
+			}
 		}
 	};
 
@@ -25,11 +58,13 @@ const Uploadimage = () => {
 			{/* file one */}
 			<label htmlFor="fileUploadOne" className=" flex justify-start  text-left">
 				<div className="md:w-36 w-20 flex justify-center items-center flex-col rounded-3xl cursor-pointer h-20 md:h-36 bg-slate-400">
-					{loadingOne ? (
-						<>
-							<VscLoading className="text-3xl animate-spin" />
-							<p className="hidden md:inline">Image Uploading</p>
-						</>
+					{imgOne ? (
+						// eslint-disable-next-line @next/next/no-img-element
+						<img
+							alt="img"
+							src={imgOne}
+							className="md:w-36 w-20 flex justify-center items-center flex-col rounded-3xl cursor-pointer h-20 md:h-36 bg-slate-400"
+						/>
 					) : (
 						<>
 							<AiOutlineCloudUpload className="text-3xl" />
@@ -48,11 +83,13 @@ const Uploadimage = () => {
 			{/* file two */}
 			<label htmlFor="fileUploadTwo" className=" flex justify-start  text-left">
 				<div className="md:w-36 w-20 flex justify-center items-center flex-col rounded-3xl cursor-pointer h-20 md:h-36 bg-slate-400">
-					{loadingTwo ? (
-						<>
-							<VscLoading className="text-3xl animate-spin" />
-							<p className="hidden md:inline">Image Uploading</p>
-						</>
+					{imgTwo ? (
+						// eslint-disable-next-line @next/next/no-img-element
+						<img
+							alt="img"
+							src={imgTwo}
+							className="md:w-36 w-20 flex justify-center items-center flex-col rounded-3xl cursor-pointer h-20 md:h-36 bg-slate-400"
+						/>
 					) : (
 						<>
 							<AiOutlineCloudUpload className="text-3xl" />
@@ -74,11 +111,13 @@ const Uploadimage = () => {
 				className=" flex justify-start  text-left"
 			>
 				<div className="md:w-36 w-20 flex justify-center items-center flex-col rounded-3xl cursor-pointer h-20 md:h-36 bg-slate-400">
-					{loadingThree ? (
-						<>
-							<VscLoading className="text-3xl animate-spin" />
-							<p className="hidden md:inline">Image Uploading</p>
-						</>
+					{imgThree ? (
+						// eslint-disable-next-line @next/next/no-img-element
+						<img
+							alt="img"
+							src={imgThree}
+							className="md:w-36 w-20 flex justify-center items-center flex-col rounded-3xl cursor-pointer h-20 md:h-36 bg-slate-400"
+						/>
 					) : (
 						<>
 							<AiOutlineCloudUpload className="text-3xl" />
