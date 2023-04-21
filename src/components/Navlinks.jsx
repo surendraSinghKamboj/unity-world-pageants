@@ -69,7 +69,7 @@ const Navlinks = ({ display, pop }) => {
 						);
 					})}
 				<li
-					className={`text-white md:hidden md:w-auto w-full text-center hover:opacity-80 uppercase`}
+					className={`text-white cursor-pointer md:hidden md:w-auto w-full text-center hover:opacity-80 uppercase`}
 					onClick={() => pop(true)}
 				>
 					Query
