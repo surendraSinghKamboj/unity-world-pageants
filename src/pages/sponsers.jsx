@@ -2,7 +2,8 @@ import React from 'react'
 
 const sponsers = () => {
   return (
-    <div>sponsers pending</div>
+    <div>sponsers under development
+    </div>
   )
 }
 
