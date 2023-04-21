@@ -56,7 +56,7 @@ const Register = () => {
 
 	return (
 		<>
-			<Image alt="logo" src={logo} width={100} />
+			<Image alt="logo" src={logo} width={100} className="mt-1" />
 			<Alert text={text} />
 			{inputs &&
 				inputs.map(({ type, name, placeholder }, index) => (

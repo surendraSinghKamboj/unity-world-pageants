@@ -13,7 +13,7 @@ const LoginRegister = ({ close }) => {
 				onClick={() => close(false)}
 			/>
 			<div className="bg-[#350200] text-white rounded-md flex flex-col relative justify-center items-center m-auto min-h-[90vh] mt-8 w-[90%] md:w-1/2">
-				<div className="flex absolute w-full top-3">
+				<div className="flex w-full top-3">
 					<div
 						onClick={() => setPart("register")}
 						className={`w-full flex justify-center cursor-pointer`}

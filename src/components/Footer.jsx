@@ -1,5 +1,7 @@
 import React from "react";
 import { AiFillFacebook, AiFillInstagram } from "react-icons/ai";
+import logo from "../assets/logo.png"
+import Image from "next/image";
 
 const Footer = () => {
 	return (
@@ -24,6 +26,9 @@ const Footer = () => {
 						</a>
 					</div>
 				</div>
+                <div>
+                    <Image alt="logo" src={logo} width={100} />
+                </div>
 				<div className="md:w-[25%] mt-5 md:mt-0">
 					<h3 className="text-center uppercase text-white">Contact US</h3>
 					<p className="text-white hover:opacity-80 text-center cursor-pointer">
