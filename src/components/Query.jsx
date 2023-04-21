@@ -6,6 +6,7 @@ import Image from "next/image";
 
 const Register = () => {
 	const [text, setText] = useState("");
+	const [status, setStatus] = useState("Submit");
 	const inputs = [
 		{ type: "text", name: "name", placeholder: "Full name" },
 		{ type: "email", name: "email", placeholder: "E-mail" },
@@ -33,16 +34,18 @@ const Register = () => {
 			setText("All feildes are medatory");
 		} else {
 			try {
-				const response = await axios.post(`/api/queries/query`, {
+				setStatus("Sending");
+				const response = await axios.post(`/api/mail/query`, {
 					name,
 					email,
 					mobile,
 					message,
 				});
+				setStatus("Submit");
 				setText(response.data.message);
 			} catch (error) {
+				setStatus("Submit");
 				console.log("error");
-				console.log(error);
 			}
 		}
 	};
@@ -77,7 +80,7 @@ const Register = () => {
 				className="mt-4 border-2 shadow-md shadow-white active:translate-y-1 active:shadow-none transition-all duration-500 px-4 rounded-md py-1 hover:opacity-80  hover:text-white"
 				onClick={handleSubmit}
 			>
-				Submit
+				{status}
 			</button>
 		</>
 	);

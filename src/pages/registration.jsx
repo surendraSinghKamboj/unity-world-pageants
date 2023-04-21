@@ -4,11 +4,16 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+import { registerValidator } from "../../validator/register";
+import axios from "axios";
+import Terms from "@/components/Terms";
 
 const registration = () => {
 	const images = useSelector((result) => result.updateImages);
 	const { imgOne, imgTwo, imgThree } = images;
 	const [prefix, setPrefix] = useState("");
+	const [status, setStatus] = useState("Submit");
+	const [terms, setTerms] = useState("");
 	const [category, setCategory] = useState("");
 	const [openPrefix, setOpenPrefix] = useState(false);
 	const [openCategory, setOpenCategory] = useState(false);
@@ -30,15 +35,24 @@ const registration = () => {
 				imgTwo,
 				imgThree,
 			};
-			console.log(readyData);
+			if (registerValidator(readyData)) {
+				try {
+					setStatus("Sending");
+					const { data } = await axios.post("/api/mail/register", readyData);
+					data ? console.log(data) : null;
+					setStatus("Submit");
+				} catch (error) {
+					setStatus("Submit");
+				}
+			}
 		} else {
-			console.log(prefix, category);
 			console.log("there is a error");
 		}
 	};
 
 	return (
 		<div className="flex flex-col bg-[#350200] m-auto py-4 justify-center items-center w-full ">
+			{terms ? <Terms close={setTerms} /> : null}
 			<h3 className="mt-4 mb-10 text-white">Entry Form</h3>
 
 			<Image alt="logo" src={logo} width={100} />
@@ -209,13 +223,15 @@ const registration = () => {
 			/>
 			<div className="flex justify-start gap-4 items-center md:w-[38%] w-[78%]">
 				<input type="checkbox" name="terms" />
-				<p className="text-blue-700 text-lg">terms & conditions</p>
+				<p className="text-blue-700 cursor-pointer text-lg" onClick={() => setTerms(true)}>
+					terms & conditions
+				</p>
 			</div>
 			<button
 				className="mt-4 border-2 shadow-md text-white shadow-white active:translate-y-1 active:shadow-none transition-all duration-500 px-4 rounded-md py-1 hover:opacity-80  hover:text-white"
 				onClick={() => handleSubmit(prefix, category)}
 			>
-				Submit
+				{status}
 			</button>
 		</div>
 	);

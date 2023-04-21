@@ -9,7 +9,7 @@ const LoginRegister = ({ close }) => {
 	return (
 		<div className="absolute w-full h-[100vh] bg-[rgba(0,0,0,0.9)] top-0 z-10">
 			<AiOutlineClose
-				className="text-white absolute p-1 cursor-pointer hover:bg-white hover:text-black text-2xl rounded-full right-4 top-4"
+				className="text-white z-30 absolute p-1 cursor-pointer hover:bg-white hover:text-black text-2xl rounded-full right-4 top-4"
 				onClick={() => close(false)}
 			/>
 			<div className="bg-[#350200] text-white rounded-md flex flex-col relative justify-center items-center m-auto min-h-[90vh] mt-8 w-[90%] md:w-1/2">
