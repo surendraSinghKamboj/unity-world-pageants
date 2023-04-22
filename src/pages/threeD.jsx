@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { partners_carosel } from "@/assets";
 
-const GrandFamily = () => {
+const carosel = () => {
 	const [start, setStart] = useState(0);
 	const [end, setEnd] = useState(0);
 
@@ -65,4 +65,4 @@ const GrandFamily = () => {
 	);
 };
 
-export default GrandFamily;
+export default carosel;
