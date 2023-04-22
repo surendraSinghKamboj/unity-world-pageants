@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { partners_carosel } from "@/assets";
+import { AiFillCaretRight, AiFillCaretLeft } from "react-icons/ai";
 
 const GrandFamily = () => {
 	const [start, setStart] = useState(0);
@@ -20,16 +21,16 @@ const GrandFamily = () => {
 	return (
 		<div className="relative mt-3 md:w-[80%] w-full m-auto">
 			<button
-				className="absolute top-1/2 left-0 bg-slate-500 text-white px-3 rounded-lg"
+				className="absolute top-1/2 left-[0] bg-slate-500 text-white px-3 rounded-lg"
 				onClick={() => scrollNow("prev")}
 			>
-				Prev
+				<AiFillCaretLeft />
 			</button>
 			<button
-				className="absolute top-1/2 right-0 bg-slate-500 text-white px-3 rounded-lg "
+				className="absolute top-1/2 right-2 bg-slate-500 text-white px-3 rounded-lg "
 				onClick={() => scrollNow("next")}
 			>
-				Next
+				<AiFillCaretRight />
 			</button>
 			<div
 				className="flex gap-[2%] md:gap-[1%] selector w-full overflow-hidden scroll-smooth"
