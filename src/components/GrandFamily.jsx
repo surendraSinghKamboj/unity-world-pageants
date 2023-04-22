@@ -32,7 +32,7 @@ const GrandFamily = () => {
 				Next
 			</button>
 			<div
-				className="flex gap-[5%] md:gap-[1%] selector w-full overflow-hidden scroll-smooth"
+				className="flex gap-[2%] md:gap-[1%] selector w-full overflow-hidden scroll-smooth"
 				onTouchStart={(e) => setStart(e.changedTouches[0].clientX)}
 				onTouchEnd={(e) => {
 					setEnd(e.changedTouches[0].clientX);
@@ -57,7 +57,7 @@ const GrandFamily = () => {
 						key={index}
 						alt="partners"
 						src={item}
-						className="md:w-[24%] w-[40%]  rounded-xl transition-all duration-300 hover:bg-[#300250] cursor-pointer shadow-inner shadow-slate-50 p-4 bg-[#350200]"
+						className="md:w-[24%] w-[48%]  rounded-xl transition-all duration-300 hover:bg-[#300250] cursor-pointer shadow-inner shadow-slate-50 p-4 bg-[#350200]"
 					/>
 				))}
 			</div>
