@@ -23,7 +23,7 @@ const Navbar = () => {
 		<motion.div
 			initial={{ y: "-400px" }}
 			animate={{ y: 0 }}
-			className="bg-[#350200] z-20"
+			className="bg-[#350200] z-50"
 		>
 			<div className="flex justify-between m-auto items-center w-[90%]">
 				{/* Logo in below div */}
