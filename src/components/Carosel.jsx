@@ -20,7 +20,7 @@ export default function App() {
         slidesPerView={"auto"}
         coverflowEffect={{
           rotate: 10,
-          stretch: 0,
+          stretch: 2,
           depth: 100,
           modifier: 2,
           slideShadows: true,
@@ -29,7 +29,7 @@ export default function App() {
         loop={true}
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
         autoplay={{ delay: 1000 }}
-        className="swiper mt-3 mb-3"
+        className="swiper mt-3 mb-3 scroll-smooth"
       >
         {carosel &&
           carosel.map((item, index) => {
@@ -38,7 +38,7 @@ export default function App() {
                 key={index}
                 className="swiper-slide rounded-2xl mt-4 mb-4"
               >
-                <Image alt="carousel" className="p-5" src={item} />
+                <Image alt="carousel" className="p-5 rounded-xl" src={item} />
               </SwiperSlide>
             );
           })}
