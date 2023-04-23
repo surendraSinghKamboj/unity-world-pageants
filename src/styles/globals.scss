@@ -12,13 +12,14 @@
 			background-position: center;
 			background-size: cover;
 			background-color: #350200;
-			width: 40% !important;
-			height: 500px !important;
+			width: 400px !important;
+			height: 400px !important;
 			box-shadow: 0 0 10px 10px rgba($color: #000000, $alpha: 0.6);
 
 			@media screen and (max-width: 768px) {
-				width: 80% !important;
+				width: 300px !important;
 				height: 300px !important;
+				background-color: #200350 ;
 			}
 		}
 	}
@@ -34,13 +35,4 @@
 	color: #fff;
 	backdrop-filter: blur(1) !important;
 	cursor: pointer;
-}
-
-.selectorImage {
-	user-drag: none;
-	-webkit-user-drag: none;
-	user-select: none;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
 }
