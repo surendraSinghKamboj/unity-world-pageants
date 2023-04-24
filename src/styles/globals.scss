@@ -39,3 +39,17 @@
 	backdrop-filter: blur(1) !important;
 	cursor: pointer;
 }
+
+::-webkit-scrollbar {
+	width: 5px;
+	background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #350200;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #292626;
+}
