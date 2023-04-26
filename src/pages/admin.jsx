@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { MdAdminPanelSettings } from "react-icons/md";
-const Login = () => {
+
+const admin = () => {
 	const [data, setData] = useState({});
 	const feilds = [
 		{ name: "email", placeholder: "Enter your email" },
@@ -37,4 +39,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default admin;
