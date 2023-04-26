@@ -1,25 +1,28 @@
+import axios from 'axios';
+
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user: process.env.USER_E_MAIL,
-        pass: process.env.USER_PASS
-    }
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.USER_E_MAIL,
+    pass: process.env.USER_PASS
+  }
 });
 
 async function sendEmail(req, res) {
-    const { name, email, mobile, message } = req.body;
+  const { name, email, mobile, message } = req.body;
 
-    if (req.method === "POST") {
-        try {
-            const info = await transporter.sendMail({
-                from: process.env.USER_E_MAIL,
-                to: process.env.RECIVE_E_MAIL,
-                subject: "Query From UWP",
-                html: `
+  if (req.method === "POST") {
+    try {
+      await axios.post("http://localhost:3000/api/queries/query", { name, email, mobile, message });
+      const info = await transporter.sendMail({
+        from: process.env.USER_E_MAIL,
+        to: process.env.RECIVE_E_MAIL,
+        subject: "Query From UWP",
+        html: `
               <html>
                 <head>
                   <link rel="stylesheet" href="/style.css">
@@ -56,13 +59,13 @@ async function sendEmail(req, res) {
                 </body>
               </html>
             `
-            });
-            return res.status(200).json({ status: true, message: "Message sent Successfull", message_id: info.messageId })
-        } catch (error) {
-            console.log(error)
-            return res.status(400).json({ status: false, message: "Message sent failed" })
-        }
+      });
+      return res.status(200).json({ status: true, message: "Message sent Successfull", message_id: info.messageId })
+    } catch (error) {
+      console.log(error)
+      return res.status(400).json({ status: false, message: "Message sent failed" })
     }
+  }
 }
 
 export default sendEmail;

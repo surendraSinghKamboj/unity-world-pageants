@@ -9,11 +9,13 @@ import { useEffect } from "react";
 
 const queries = () => {
 	const [data, setData] = useState([]);
+	const [query, setQuery] = useState(1);
 	useEffect(() => {
 		const getData = async () => {
 			try {
 				const response = await axios.get("/api/queries/getQuery");
 				if (response) {
+					setQuery(1+query);
 					setData(response.data.result);
 				}
 			} catch (error) {
@@ -21,7 +23,7 @@ const queries = () => {
 			}
 		};
 		getData();
-	}, []);
+	}, [query]);
 
 	return (
 		<>
@@ -31,15 +33,22 @@ const queries = () => {
 				<h3 className="text-white text-xl text-center">Queries</h3>
 			</div>
 			<div className="flex justify-center flex-wrap items-center">
-				{data.map(({ name, email, mobile, message }, index) => (
-					<QueryCard
-						key={index}
-						name={name}
-						email={email}
-						mobile={mobile}
-						message={message}
-					/>
-				))}
+				{data ? (
+					data.map(({ _id, name, email, mobile, message }) => (
+						<QueryCard
+							key={_id}
+							id={_id}
+							name={name}
+							email={email}
+							mobile={mobile}
+							message={message}
+						/>
+					))
+				) : (
+					<div className="w-full bg-[#350200] h-[400px] flex justify-center items-center">
+						<h3 className="text-black">There is no any query...</h3>
+					</div>
+				)}
 			</div>
 		</>
 	);

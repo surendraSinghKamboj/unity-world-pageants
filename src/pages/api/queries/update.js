@@ -2,9 +2,10 @@ import Query from "../../../../models/query";
 import connectDb from "../../../../middlewares/connectDb";
 
 const handler = async (req, res) => {
-    if (req.method === "GET") {
+    if (req.method === "PUT") {
+        const { id } = req.body
         try {
-            const query = await Query.find({ resolved: false })
+            const query = await Query.findOneAndUpdate({ _id: id }, { resolved: true })
             if (query) {
                 res.status(201).json({ success: true, message: "message sent successfull.", result: query })
             }
