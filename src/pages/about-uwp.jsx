@@ -5,6 +5,8 @@ import React from "react";
 import aboutImage from "../assets/about.jpeg";
 import Head from "next/head";
 import { seoDescription } from "@/content";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 
 const about = () => {
@@ -16,6 +18,7 @@ const about = () => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<Navbar />
 			<div>
 				<motion.div
 					initial={{ y: "-100px" }}
@@ -48,6 +51,7 @@ const about = () => {
 					</div>
 				</motion.div>
 			</div>
+			<Footer />
 		</>
 	);
 };

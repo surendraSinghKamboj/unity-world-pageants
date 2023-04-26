@@ -4,6 +4,8 @@ import CompetitionArea from "@/components/CompetitionArea";
 import Image from "next/image";
 import Head from "next/head";
 import { seoDescription } from "@/content";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 const category = () => {
 	return (
@@ -14,6 +16,7 @@ const category = () => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<Navbar />
 			<div className="bg-[#350200] w-full">
 				{categoryData &&
 					categoryData.map(
@@ -48,6 +51,7 @@ const category = () => {
 					)}
 				<CompetitionArea />
 			</div>
+			<Footer />
 		</>
 	);
 };

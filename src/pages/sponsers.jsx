@@ -3,6 +3,8 @@ import { partners_carosel } from "@/assets";
 import Image from "next/image";
 import Head from "next/head";
 import { seoDescription } from "@/content";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const sponsers = () => {
 	return (
@@ -13,6 +15,7 @@ const sponsers = () => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<Navbar />
 			<div className="flex w-[90%] m-auto flex-col py-4 justify-center items-center">
 				<div className="bg-[#350200] w-full py-2">
 					<h3 className="text-white text-center text-2xl">
@@ -30,6 +33,7 @@ const sponsers = () => {
 					))}
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 };

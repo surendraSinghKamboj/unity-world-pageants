@@ -9,6 +9,8 @@ import axios from "axios";
 import Terms from "@/components/Terms";
 import Head from "next/head";
 import { seoDescription } from "@/content";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const registration = () => {
 	const images = useSelector((result) => result.updateImages);
@@ -65,6 +67,7 @@ const registration = () => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<Navbar />
 			<div className="flex flex-col bg-[#350200] m-auto py-4 justify-center items-center w-full ">
 				{terms ? <Terms close={setTerms} /> : null}
 				<h3 className="mt-4 mb-10 text-white">Entry Form</h3>
@@ -258,6 +261,7 @@ const registration = () => {
 					{status}
 				</button>
 			</div>
+			<Footer />
 		</>
 	);
 };

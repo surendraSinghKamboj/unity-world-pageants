@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { AiOutlineClose } from "react-icons/ai";
 import Head from "next/head";
 import { seoDescription } from "@/content";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const contestents = () => {
 	// eslint-disable-next-line react-hooks/rules-of-hooks
@@ -48,6 +50,7 @@ const contestents = () => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<Navbar />
 			<div className="mt-1 uppercase py-2 text-white bg-[#350200] text-center">
 				contestents
 			</div>
@@ -148,6 +151,7 @@ const contestents = () => {
 					</div>
 				</motion.div>
 			) : null}
+			<Footer />
 		</>
 	);
 };

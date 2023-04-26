@@ -7,6 +7,8 @@ import Carosel from "@/components/Carosel";
 import GrandFamily from "@/components/GrandFamily";
 import Campaign from "@/components/Campaign";
 import { seoDescription } from "@/content";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function Home() {
 	return (
@@ -18,7 +20,8 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			
+			<Navbar />
+
 			<motion.div
 				initial={{ x: "100px" }}
 				animate={{ x: 0 }}
@@ -89,6 +92,7 @@ export default function Home() {
 			<div className="w-[80%] m-auto">
 				<GrandFamily />
 			</div>
+			<Footer />
 		</>
 	);
 }
