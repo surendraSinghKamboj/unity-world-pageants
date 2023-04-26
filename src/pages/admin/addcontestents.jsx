@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const addcontestents = () => {
 	const images = useSelector((result) => result.updateImages);
+	const title = useSelector((result) => result.title);
 	const feilds = [
 		{ type: "text", name: "name", placeholder: "Enter Name" },
 		{ type: "number", name: "age", placeholder: "Enter Age" },
@@ -21,7 +22,7 @@ const addcontestents = () => {
 		},
 		{
 			type: "text",
-			name: "volunteerCharityProject",
+			name: "reasonForEnteringPageant",
 			placeholder: "Reason for entering Pagent",
 		},
 	];
