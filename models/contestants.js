@@ -1,11 +1,11 @@
 import mongoose from "mongoose"
 
 const contestantSchema = new mongoose.Schema({
-    name: {
+    title: {
         type: String,
         required: true
     },
-    title: {
+    name: {
         type: String,
         required: true
     },
@@ -21,14 +21,6 @@ const contestantSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    hobbies: {
-        type: [String],
-        required: true
-    },
-    awards: {
-        type: [String],
-        required: false
-    },
     biography: {
         type: String,
         required: true
@@ -40,6 +32,21 @@ const contestantSchema = new mongoose.Schema({
     reasonForEnteringPageant: {
         type: String,
         required: true
+    },
+    votes: {
+        type: Number,
+        select: false
+    },
+    images: {
+        type: [String],
+    },
+    hobbies: {
+        type: [String],
+        required: true
+    },
+    awards: {
+        type: [String],
+        required: false
     }
 });
 

@@ -2,7 +2,7 @@ import React from "react";
 import { partners_carosel } from "@/assets";
 import Image from "next/image";
 import Head from "next/head";
-import { seoDescription } from "@/content";
+import { seoDescription } from "@/websitecontent/content";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 

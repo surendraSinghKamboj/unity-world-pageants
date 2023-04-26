@@ -6,7 +6,7 @@ import Image from "next/image";
 import Carosel from "@/components/Carosel";
 import GrandFamily from "@/components/GrandFamily";
 import Campaign from "@/components/Campaign";
-import { seoDescription } from "@/content";
+import { seoDescription } from "@/websitecontent/content";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 

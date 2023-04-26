@@ -5,7 +5,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { AiOutlineClose } from "react-icons/ai";
 import Head from "next/head";
-import { seoDescription } from "@/content";
+import { seoDescription } from "@/websitecontent/content";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 

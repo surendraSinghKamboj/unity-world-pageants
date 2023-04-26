@@ -3,7 +3,7 @@ import { categoryData } from "@/data/category";
 import CompetitionArea from "@/components/CompetitionArea";
 import Image from "next/image";
 import Head from "next/head";
-import { seoDescription } from "@/content";
+import { seoDescription } from "@/websitecontent/content";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 

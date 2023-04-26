@@ -8,7 +8,7 @@ import { registerValidator } from "../../validator/register";
 import axios from "axios";
 import Terms from "@/components/Terms";
 import Head from "next/head";
-import { seoDescription } from "@/content";
+import { seoDescription } from "@/websitecontent/content";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
