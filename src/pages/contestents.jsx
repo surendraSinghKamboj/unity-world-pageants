@@ -85,7 +85,7 @@ const contestents = () => {
 				<motion.div
 					initial={{ scale: 0 }}
 					animate={{ scale: 1 }}
-					className="absolute md:flex md:flex-row gap-4 flex flex-col top-0 w-full min-h-screen bg-[#350200]"
+					className="md:flex md:flex-row gap-4 flex flex-col fixed top-0 w-full min-h-screen bg-[#350200]"
 				>
 					<AiOutlineClose
 						onClick={() => {
