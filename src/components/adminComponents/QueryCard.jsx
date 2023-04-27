@@ -5,25 +5,36 @@ import { TiTickOutline } from "react-icons/ti";
 import { motion } from "framer-motion";
 import axios from "axios";
 
-const QueryCard = ({ id, name, email, mobile, message }) => {
+const QueryCard = ({ id, name, email, mobile, message, resolved, query }) => {
 	const [open, setOpen] = useState(false);
 
 	const updateQuery = async (id) => {
-		console.log(id);
 		try {
-			const response = await axios.put(`/api/queries/update`, { id });
+			const response = await axios.put(
+				`/api/queries/update`,
+				{ id },
+				{
+					headers: { "resolve-type": resolved },
+				}
+			);
 			if (response) {
-				console.log(response);
+				query(Math.random());
 			}
 		} catch (error) {
-			console.log(error);
+			console.error("failed to update");
 		}
 	};
 
 	return (
 		<div
-			style={{ backgroundImage: "url(/bgQueryCard.jpg)" }}
-			className="w-[400px] px-2 py-3 m-3 text-white h-[200px] relative transition-all duration-300 hover:shadow-2xl hover:shadow-red-800 rounded-2xl"
+			style={{
+				backgroundImage: resolved
+					? "url(/bgtrue.jpg)"
+					: "url(/bgQueryCard.jpg)",
+			}}
+			className={`w-[400px] px-2 py-3 m-3 text-white h-[200px] relative transition-all duration-300 hover:shadow-2xl hover:${
+				resolved ? "shadow-blue-900" : "shadow-red-800"
+			} rounded-2xl`}
 		>
 			<div className="flex justify-start items-center">
 				<h3 className="text-xl w-[100px]">Name</h3>
@@ -37,7 +48,9 @@ const QueryCard = ({ id, name, email, mobile, message }) => {
 			</div>
 			<div className="flex justify-start items-center">
 				<h3 className="text-xl w-[100px]">Mobile</h3>
-				<p>{mobile}</p>
+				<a href={`tel:${mobile}`}>
+					<p>{mobile}</p>
+				</a>
 			</div>
 			<button
 				onClick={() => setOpen(!open)}
@@ -49,7 +62,9 @@ const QueryCard = ({ id, name, email, mobile, message }) => {
 				<motion.div
 					initial={{ rotateY: 180, rotateZ: 180 }}
 					animate={{ rotateY: 0, rotateZ: 0 }}
-					className="absolute rounded-2xl bg-[#350200] w-[400px] h-[200px] p-3 top-0 left-0 "
+					className={`absolute rounded-2xl ${
+						resolved ? "bg-blue-950" : "bg-[#350200]"
+					} w-[400px] h-[200px] p-3 top-0 left-0`}
 				>
 					<div className="flex justify-end gap-2">
 						<AiOutlineClose

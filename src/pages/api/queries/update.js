@@ -5,7 +5,8 @@ const handler = async (req, res) => {
     if (req.method === "PUT") {
         const { id } = req.body
         try {
-            const query = await Query.findOneAndUpdate({ _id: id }, { resolved: true })
+            const resolveType = req.headers["resolve-type"]
+            const query = await Query.findOneAndUpdate({ _id: id }, { resolved: !resolveType })
             if (query) {
                 res.status(201).json({ success: true, message: "message sent successfull.", result: query })
             }

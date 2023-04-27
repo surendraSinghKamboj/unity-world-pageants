@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import countries from "@/websitecontent/contries";
 import logo from "../assets/logo.png";
 import axios from "axios";
 import Alert from "./Alert";
@@ -7,19 +8,14 @@ import Image from "next/image";
 const Register = () => {
 	const [text, setText] = useState("");
 	const [status, setStatus] = useState("Submit");
+
 	const inputs = [
 		{ type: "text", name: "name", placeholder: "Full name" },
 		{ type: "email", name: "email", placeholder: "E-mail" },
 		{ type: "text", name: "mobile", placeholder: "Conatct number" },
 	];
 
-	const [data, setData] = useState({
-		name: "",
-		email: "",
-		mobile: "",
-		password: "",
-		confirmPassword: "",
-	});
+	const [data, setData] = useState({});
 
 	const handleChange = (e) => {
 		setData({
@@ -29,16 +25,19 @@ const Register = () => {
 	};
 
 	const handleSubmit = async () => {
-		const { name, email, mobile, message } = data;
-		if (!name || !email || !mobile || !message) {
+		console.log(data);
+		const { name, email, mobile, country, message } = data;
+		if (!name || !email || !mobile || !message || !country) {
 			setText("All feildes are medatory");
+		} else if (mobile.length !== 10) {
+			setText("Please enter correct mobile number");
 		} else {
 			try {
 				setStatus("Sending");
 				const response = await axios.post(`/api/mail/query`, {
 					name,
 					email,
-					mobile,
+					mobile: `+${country}-${mobile}`,
 					message,
 				});
 				setStatus("Submit");
@@ -69,6 +68,25 @@ const Register = () => {
 						className="rounded-lg px-2 border-2 mt-2 border-white bg-slate-800 py-1 w-72"
 					/>
 				))}
+			<select
+				name="country"
+				id="country"
+				onChange={(e) => handleChange(e)}
+				className="rounded-lg px-2 border-2 mt-2 border-white bg-slate-800 py-1 w-72"
+			>
+				<option value={null} className="text-white w-72 overflow-x-hidden">
+					Select Country
+				</option>
+				{countries.map(({ countryName, code }, index) => (
+					<option
+						key={index}
+						value={code}
+						className="text-white w-72 overflow-x-hidden hover:bg-[#350200]"
+					>
+						{countryName}
+					</option>
+				))}
+			</select>
 			<textarea
 				name="message"
 				className="w-72 bg-slate-800 mt-2 px-2 border-white border-2"
