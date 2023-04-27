@@ -1,12 +1,26 @@
 import React from "react";
 import { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai";
 import { TiTickOutline } from "react-icons/ti";
 import { motion } from "framer-motion";
 import axios from "axios";
 
 const QueryCard = ({ id, name, email, mobile, message, resolved, query }) => {
 	const [open, setOpen] = useState(false);
+
+	const handleDelete = async (id) => {
+		console.log(id);
+		try {
+			const response = await axios.delete(`/api/queries/deleteHandler`, {
+				data: { id },
+			});
+			if (response) {
+				query(Math.random());
+			}
+		} catch (error) {
+			console.log("failed deletion....");
+		}
+	};
 
 	const updateQuery = async (id) => {
 		try {
@@ -68,13 +82,19 @@ const QueryCard = ({ id, name, email, mobile, message, resolved, query }) => {
 				>
 					<div className="flex justify-end gap-2">
 						<AiOutlineClose
-							className="text-right cursor-pointer bg-red-700 rounded-full "
+							className="text-right cursor-pointer bg-yellow-700 rounded-full "
 							onClick={() => setOpen(false)}
 						/>
 						<TiTickOutline
 							className="text-right cursor-pointer bg-green-700 rounded-full "
 							onClick={() => updateQuery(id)}
 						/>
+						{resolved ? (
+							<AiOutlineDelete
+								className="text-right cursor-pointer bg-red-700 rounded-full "
+								onClick={() => handleDelete(id)}
+							/>
+						) : null}
 					</div>
 					<p>{message}</p>
 				</motion.div>
