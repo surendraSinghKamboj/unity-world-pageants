@@ -4,8 +4,19 @@ import contestants from "../../../../models/contestants";
 
 const handler = async (req, res) => {
     if (req.method === "POST") {
-        const { name, images, title, age, occupation, height, hobbies, awards, biography, reasonForEnteringPageant, volunteerCharityProject } = req.body
-        console.log(req.body);
+        const {
+            name,
+            images,
+            title,
+            age,
+            occupation,
+            height,
+            hobbies,
+            awards,
+            biography,
+            reasonForEnteringPageant,
+            volunteerCharityProject
+        } = req.body
         try {
             const response = await contestants.create({
                 name,

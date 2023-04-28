@@ -51,7 +51,7 @@ const addcontestents = () => {
 		try {
 			const response = await axios.post("/api/contestents/fromClient", newData);
 			if (response) {
-				console.log(response);
+				console.log(response.data);
 			}
 		} catch (error) {
 			console.log(error);

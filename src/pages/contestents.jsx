@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @next/next/no-img-element */
+
 import React, { useEffect, useState } from "react";
-import slide_europe from "../assets/slide_europe.jpeg";
-import Image from "next/image";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { AiOutlineClose } from "react-icons/ai";
@@ -10,22 +11,15 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const contestents = () => {
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [data, setData] = useState([]);
-
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [view, setView] = useState(false);
-
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [viewData, setViewData] = useState({});
-
 	const handleView = (id) => {
 		setView(true);
 		const [item] = data.filter((item) => (item._id === id ? item : null));
 		setViewData(item);
 	};
 
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -38,7 +32,6 @@ const contestents = () => {
 		fetchData();
 	}, []);
 
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	useEffect(() => {}, [view]);
 
 	console.log(viewData);
@@ -63,11 +56,7 @@ const contestents = () => {
 								className="w-48 hover:shadow-md shadow-[#350200]"
 								key={item._id}
 							>
-								<Image
-									src={slide_europe}
-									alt={item.name}
-									className="rounded-xl"
-								/>
+								<img src={item.image} alt={item.name} className="rounded-xl" />
 								<p className="text-center">{item.name}</p>
 								{/* <button className="w-full text-center">Vote</button> */}
 								<button
@@ -95,7 +84,7 @@ const contestents = () => {
 						className="text-3xl text-white rounded-full cursor-pointer hover:text-black hover:rotate-180 transition-all duration-500 hover:bg-white absolute top-4 right-4"
 					/>
 					<div className="w-[40%] mt-[40px]">
-						<Image alt={viewData.name} src={slide_europe} />
+						<img alt={viewData.name} src={viewData.image} />
 					</div>
 					<div className="w-[60%] mt-[40px] text-white">
 						<div className="flex">
