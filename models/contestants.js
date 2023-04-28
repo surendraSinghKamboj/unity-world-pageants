@@ -13,6 +13,9 @@ const contestantSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    image: {
+        type: String
+    },
     occupation: {
         type: String,
         required: true
@@ -39,6 +42,7 @@ const contestantSchema = new mongoose.Schema({
     },
     images: {
         type: [String],
+        select: false
     },
     hobbies: {
         type: [String],

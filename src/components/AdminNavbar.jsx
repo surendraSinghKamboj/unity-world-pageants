@@ -3,7 +3,7 @@ import React from "react";
 
 const AdminNavbar = () => {
 	return (
-		<nav className="w-full p-2 flex items-center sticky top-0 bg-[#350200] justify-around">
+		<nav className="w-full z-50 p-2 flex items-center sticky top-0 bg-[#350200] justify-around">
 			<Link href={"/admin/Dashboard"}>
 				<h3 className="text-white text-xl">UWP admin</h3>
 			</Link>

@@ -1,14 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import AdminNavbar from "@/components/AdminNavbar";
 import Uploadimage from "@/components/Uploadimage";
+import HobbiesComponent from "@/components/adminComponents/Hobbies";
 import Title from "@/components/adminComponents/Title";
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const addcontestents = () => {
-	const images = useSelector((result) => result.updateImages);
+	const { imgOne, imgTwo, imgThree } = useSelector(
+		(result) => result.updateImages
+	);
 	const title = useSelector((result) => result.title);
+	const { Hobbies, Awards } = useSelector((result) => result.hobbies);
 	const feilds = [
 		{ type: "text", name: "name", placeholder: "Enter Name" },
 		{ type: "number", name: "age", placeholder: "Enter Age" },
@@ -30,9 +35,27 @@ const addcontestents = () => {
 
 	const handleChange = (e) => {
 		setData({
-			data,
+			...data,
 			[e.target.name]: e.target.value,
 		});
+	};
+
+	const handleSubmit = async () => {
+		const newData = {
+			...data,
+			images: [imgOne, imgTwo, imgThree],
+			title,
+			hobbies: Hobbies,
+			awards: Awards,
+		};
+		try {
+			const response = await axios.post("/api/contestents/fromClient", newData);
+			if (response) {
+				console.log(response);
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
@@ -45,9 +68,9 @@ const addcontestents = () => {
 				<div>
 					<Uploadimage />
 				</div>
-				<div className="flex mt-2 justify-center w-[90%] m-auto items-center">
+				<div className="flex flex-col mt-2 justify-center w-[90%] m-auto items-center">
 					{/* div left */}
-					<div className="w-[50%] py-5 rounded-l-3xl  flex flex-col bg-[#350200] justify-center items-center">
+					<div className="w-[50%] py-5 flex flex-col bg-[#350200] justify-center items-center">
 						<Title />
 						{feilds.map(({ type, name, placeholder }, index) => (
 							<input
@@ -61,7 +84,17 @@ const addcontestents = () => {
 						))}
 					</div>
 					{/* div right */}
-					<div className="w-[50%]">{/* hobbies */}</div>
+					<div className="w-[50%] py-5 flex flex-col bg-[#350200] justify-center items-center">
+						{/* hobbies */}
+						<HobbiesComponent title={"Hobbies"} />
+						<HobbiesComponent title={"Awards"} />
+					</div>
+					<button
+						onClick={handleSubmit}
+						className="w-[40%] bg-slate-800 text-white px-2 my-2 border-2 border-white rounded-xl"
+					>
+						Save
+					</button>
 				</div>
 			</div>
 		</>
