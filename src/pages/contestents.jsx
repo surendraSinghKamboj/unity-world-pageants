@@ -14,10 +14,23 @@ const contestents = () => {
 	const [data, setData] = useState([]);
 	const [view, setView] = useState(false);
 	const [viewData, setViewData] = useState({});
-	const handleView = (id) => {
+	const [fetchedImages, setFetchedImages] = useState([]);
+	const [viewImage, setViewImage] = useState("");
+
+	const handleView = async (id) => {
 		setView(true);
 		const [item] = data.filter((item) => (item._id === id ? item : null));
 		setViewData(item);
+		try {
+			const res = await axios.get(`/api/contestents/getClient?id=${id}`);
+			if (res) {
+				const fetchedImagesResult = res.data.response.images;
+				setViewImage(fetchedImagesResult[0]);
+				setFetchedImages(fetchedImagesResult);
+			}
+		} catch (error) {
+			console.log("fail to fetch images");
+		}
 	};
 
 	useEffect(() => {
@@ -32,9 +45,6 @@ const contestents = () => {
 		fetchData();
 	}, []);
 
-	useEffect(() => {}, [view]);
-
-	console.log(viewData);
 	return (
 		<>
 			<Head>
@@ -76,66 +86,84 @@ const contestents = () => {
 					animate={{ scale: 1 }}
 					className="md:flex md:flex-row gap-4 flex flex-col fixed top-0 w-full min-h-screen bg-[#350200]"
 				>
-					<AiOutlineClose
-						onClick={() => {
-							setView(false);
-							setViewData({});
-						}}
-						className="text-3xl text-white rounded-full cursor-pointer hover:text-black hover:rotate-180 transition-all duration-500 hover:bg-white absolute top-4 right-4"
-					/>
-					<div className="w-[40%] mt-[40px]">
-						<img alt={viewData.name} src={viewData.image} />
-					</div>
-					<div className="w-[60%] mt-[40px] text-white">
-						<div className="flex">
-							<p className="w-20">Name</p>
-							<p className="ml-3">{viewData.name}</p>
-						</div>
-						<div className="flex">
-							<p className="w-20">Title</p>
-							<p className="ml-3">{viewData.title}</p>
-						</div>
-						<div className="flex">
-							<p className="w-20">Age</p>
-							<p className="ml-3">{viewData.age} Years</p>
-						</div>
-						<div className="flex">
-							<p className="w-20">Height</p>
-							<p className="ml-3">{viewData.height}cms</p>
-						</div>
-						<div className="flex">
-							<p className="w-20">Occupation</p>
-							<p className="ml-3">{viewData.occupation}</p>
-						</div>
-						<div className="flex">
-							<p className="w-20">Hobbies</p>
-							<div className="ml-3">
-								{viewData.hobbies &&
-									viewData.hobbies.map((item, index) => (
-										<p key={index}>{item}</p>
+					<div className="md:flex md:w-[90%] md:flex-row m-auto gap-4 flex flex-col top-0 w-full min-h-screen bg-[#350200]">
+						<AiOutlineClose
+							onClick={() => {
+								setView(false);
+								setViewData({});
+							}}
+							className="text-3xl text-white rounded-full cursor-pointer hover:text-black hover:rotate-180 transition-all duration-500 hover:bg-white absolute top-4 right-4"
+						/>
+						<div className="w-[40%] mt-[40px] flex justify-center flex-col items-center">
+							<img alt={viewData.name} src={viewImage} className="h-96" />
+							<div className="flex justify-center gap-1 mt-2">
+								{fetchedImages &&
+									fetchedImages.map((item, index) => (
+										<img
+											key={index}
+											src={item}
+											alt={viewData.name}
+											className={`w-[30%] rounded-xl ${
+												viewImage === item
+													? "opacity-100 scale-100"
+													: "opacity-50 scale-75"
+											} cursor-pointer transition-all duration-500`}
+											onClick={() => setViewImage(item)}
+										/>
 									))}
 							</div>
 						</div>
-						<div className="flex">
-							<p className="w-20">Awards</p>
-							<div className="ml-3">
-								{viewData.awards &&
-									viewData.awards.map((item, index) => (
-										<p key={index}>{item}</p>
-									))}
+						<div className="w-[60%] mt-[40px] text-white">
+							<div className="flex">
+								<p className="w-40">Name</p>
+								<p className="ml-3">{viewData.name}</p>
 							</div>
-						</div>
-						<div className="flex">
-							<p className="w-20">Biography</p>
-							<p className="ml-4">{viewData.biography}</p>
-						</div>
-						<div className="flex">
-							<p className="w-20">Volunteer / Charity Project</p>
-							<p className="ml-4">{viewData.volunteerCharityProject}</p>
-						</div>
-						<div className="flex">
-							<p className="w-28">Reason for entering the pageant</p>
-							<p className="ml-4">{viewData.reasonForEnteringPageant}</p>
+							<div className="flex">
+								<p className="w-40">Title</p>
+								<p className="ml-3">{viewData.title}</p>
+							</div>
+							<div className="flex">
+								<p className="w-40">Age</p>
+								<p className="ml-3">{viewData.age} Years</p>
+							</div>
+							<div className="flex">
+								<p className="w-40">Height</p>
+								<p className="ml-3">{viewData.height}cms</p>
+							</div>
+							<div className="flex">
+								<p className="w-40">Occupation</p>
+								<p className="ml-3">{viewData.occupation}</p>
+							</div>
+							<div className="flex">
+								<p className="w-40">Hobbies</p>
+								<div className="ml-3">
+									{viewData.hobbies &&
+										viewData.hobbies.map((item, index) => (
+											<p key={index}>{item}</p>
+										))}
+								</div>
+							</div>
+							<div className="flex">
+								<p className="w-40">Awards</p>
+								<div className="ml-3">
+									{viewData.awards &&
+										viewData.awards.map((item, index) => (
+											<p key={index}>{item}</p>
+										))}
+								</div>
+							</div>
+							<div className="flex">
+								<p className="w-40">Biography</p>
+								<p className="ml-4">{viewData.biography}</p>
+							</div>
+							<div className="flex">
+								<p className="w-40">Volunteer / Charity Project</p>
+								<p className="ml-4">{viewData.volunteerCharityProject}</p>
+							</div>
+							<div className="flex">
+								<p className="w-40">Reason for entering the pageant</p>
+								<p className="ml-4">{viewData.reasonForEnteringPageant}</p>
+							</div>
 						</div>
 					</div>
 				</motion.div>
