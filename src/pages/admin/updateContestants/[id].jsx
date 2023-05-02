@@ -5,8 +5,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Uploadimage from "@/components/Uploadimage";
 import HobbiesComponent from "@/components/adminComponents/Hobbies";
+import { useDispatch } from "react-redux";
+import { update } from "../../../../Store/Features/incrementalStorage";
+import produce from "immer";
 
 const updateContestants = () => {
+	const dispatch = useDispatch();
 	const router = useRouter();
 	const [data, setData] = useState({});
 
@@ -25,6 +29,17 @@ const updateContestants = () => {
 		};
 		getContestant(router.query.id);
 	}, [router.query.id]);
+
+	const handleUpdate = () => {
+		if (data.hobbies) {
+			setData(
+				produce(data, (draft) => {
+					draft.hobbies = data.hobbies;
+					draft.awards = data.awards;
+				})
+			);
+		}
+	};
 
 	const feilds = [
 		{ type: "text", name: "name", placeholder: "Enter Name" },
@@ -53,6 +68,7 @@ const updateContestants = () => {
 
 	return (
 		<div>
+			<button onClick={handleUpdate}>Update</button>
 			<Uploadimage fetched={data.images} />
 			<div>
 				{feilds.map(({ type, name, placeholder }, index) => (

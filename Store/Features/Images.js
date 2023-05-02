@@ -17,11 +17,14 @@ const updateImages = createSlice({
             temp[payload[0]] = payload[1];
             return temp;
         },
+        resetImage: (state, { payload }) => {
+            return payload
+        }
 
     }
 })
 
 
-export const { imageFunction } = updateImages.actions;
+export const { imageFunction,resetImage } = updateImages.actions;
 
 export default updateImages.reducer;

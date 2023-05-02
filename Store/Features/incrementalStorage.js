@@ -39,10 +39,18 @@ const hobbiesSlice = createSlice({
             } else {
                 state.Awards.splice(index, 1);
             }
+        },
+        update: (state, { payload }) => {
+            const tempState = { ...state }
+            state[payload[0]] = payload[1]
+            return tempState
+        },
+        resetHobbies: (state, { payload }) => {
+            return payload
         }
     }
 });
 
-export const { add, addMore, removeItem } = hobbiesSlice.actions;
+export const { add, addMore, removeItem, update, resetHobbies } = hobbiesSlice.actions;
 
 export default hobbiesSlice.reducer;

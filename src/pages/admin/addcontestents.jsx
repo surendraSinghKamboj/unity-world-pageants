@@ -2,19 +2,23 @@
 import AdminNavbar from "@/components/AdminNavbar";
 import Uploadimage from "@/components/Uploadimage";
 import HobbiesComponent from "@/components/adminComponents/Hobbies";
-import Title from "@/components/adminComponents/Title";
 import axios from "axios";
 import React from "react";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { resetImage } from "../../../Store/Features/Images";
+import { resetHobbies } from "../../../Store/Features/incrementalStorage";
 
 const addcontestents = () => {
+	const { push } = useRouter();
+	const dispatch = useDispatch();
 	const { imgOne, imgTwo, imgThree } = useSelector(
 		(result) => result.updateImages
 	);
-	const title = useSelector((result) => result.title);
 	const { Hobbies, Awards } = useSelector((result) => result.hobbies);
 	const feilds = [
+		{ type: "text", name: "title", placeholder: "Title" },
 		{ type: "text", name: "name", placeholder: "Enter Name" },
 		{ type: "number", name: "age", placeholder: "Enter Age" },
 		{ type: "text", name: "occupation", placeholder: "Occupation" },
@@ -44,14 +48,21 @@ const addcontestents = () => {
 		const newData = {
 			...data,
 			images: [imgOne, imgTwo, imgThree],
-			title,
 			hobbies: Hobbies,
 			awards: Awards,
 		};
 		try {
 			const response = await axios.post("/api/contestents/fromClient", newData);
 			if (response) {
-				console.log(response.data);
+				dispatch(
+					resetImage({
+						imgOne: null,
+						imgTwo: null,
+						imgThree: null,
+					})
+				);
+				dispatch(resetHobbies({ Hobbies: [""], Awards: [""] }));
+				push("/admin/contestents");
 			}
 		} catch (error) {
 			console.log(error);
@@ -71,7 +82,6 @@ const addcontestents = () => {
 				<div className="flex flex-col mt-2 justify-center w-[90%] m-auto items-center">
 					{/* div left */}
 					<div className="w-[50%] py-5 flex flex-col bg-[#350200] justify-center items-center">
-						<Title />
 						{feilds.map(({ type, name, placeholder }, index) => (
 							<input
 								key={index}

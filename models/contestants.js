@@ -38,6 +38,7 @@ const contestantSchema = new mongoose.Schema({
     },
     votes: {
         type: Number,
+        default: 0,
         select: false
     },
     images: {
