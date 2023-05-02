@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { imageFunction } from "../../Store/Features/Images";
 
-const Uploadimage = () => {
+const Uploadimage = ({ fetched }) => {
 	const data = useSelector((result) => result.updateImages);
 	const { imgOne, imgTwo, imgThree } = data;
 
 	const dispatch = useDispatch();
+
+	/// Admin panel handler
+	useEffect(() => {
+		if (fetched) {
+			dispatch(imageFunction(["imgOne", fetched[0]]));
+			dispatch(imageFunction(["imgTwo", fetched[1]]));
+			dispatch(imageFunction(["imgThree", fetched[2]]));
+		}
+	}, [dispatch, fetched]);
 
 	const handleChange = async (e) => {
 		// event blob converter

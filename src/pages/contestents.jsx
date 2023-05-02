@@ -22,7 +22,7 @@ const contestents = () => {
 		const [item] = data.filter((item) => (item._id === id ? item : null));
 		setViewData(item);
 		try {
-			const res = await axios.get(`/api/contestents/getClient?id=${id}`);
+			const res = await axios.get(`/api/contestents/getImages?id=${id}`);
 			if (res) {
 				const fetchedImagesResult = res.data.response.images;
 				setViewImage(fetchedImagesResult[0]);

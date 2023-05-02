@@ -17,6 +17,7 @@ const updateImages = createSlice({
             temp[payload[0]] = payload[1];
             return temp;
         },
+
     }
 })
 

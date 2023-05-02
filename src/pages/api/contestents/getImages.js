@@ -4,7 +4,6 @@ import contestants from "../../../../models/contestants";
 const handler = async (req, res) => {
     if (req.method === "GET") {
         const { id } = req.query
-        console.log(id)
         try {
             const response = await contestants.findById(id).select("images")
             if (response) {
