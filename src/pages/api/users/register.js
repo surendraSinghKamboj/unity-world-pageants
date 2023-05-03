@@ -2,6 +2,7 @@ import Users from "../../../../models/users";
 import connectDb from "../../../../middlewares/connectDb";
 import { sendToken } from "../../../../utils/token";
 import bcrypt from "bcrypt"
+import cookie from "cookie"
 
 const handler = async (req, res) => {
     if (req.method === "POST") {
@@ -33,14 +34,21 @@ const handler = async (req, res) => {
                 password: hashedPassword,
             });
 
-            sendToken(user, res, "Registered Succussfully......", 201)
+            const token = sendToken(user)
 
-            res.status(201).json({ message: "account created successfull." })
+            if (token) {
+                const cookieSerialized = cookie.serialize("token", token, {
+                    httpOnly: true,
+                    maxAge: 43200000,
+                });
+                res.setHeader('Set-Cookie', cookieSerialized);
+                res.status(201).json({ status: true, message: "Account created successfully." })
+            }
         } catch (error) {
-            console.error("Accout Creatation failed....");
+            console.error("Accout Creatation failed: ", error);
             res.status(401).json({
                 success: false,
-                message: "Accout Creatation failed....",
+                message: "Accout Creatation failed",
             });
         }
     } else {

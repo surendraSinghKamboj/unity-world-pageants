@@ -1,13 +1,9 @@
 import jwt from "jsonwebtoken"
 
-export const sendToken = (user, res, message, statusCode = 200) => {
+
+export const sendToken = (user) => {
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET)
 
-    res.status(statusCode).json({
-        success: true,
-        message,
-        token
-    });
-
+    return token
 }

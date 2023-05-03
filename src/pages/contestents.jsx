@@ -1,14 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
-
+import logo from "../assets/logo.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiFillCloseCircle, AiOutlineClose } from "react-icons/ai";
 import Head from "next/head";
 import { seoDescription } from "@/websitecontent/content";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Image from "next/image";
+import LoginUser from "@/components/LoginUser";
+import RegisterUser from "@/components/RegisterUser";
 
 const contestents = () => {
 	const [data, setData] = useState([]);
@@ -16,6 +19,9 @@ const contestents = () => {
 	const [viewData, setViewData] = useState({});
 	const [fetchedImages, setFetchedImages] = useState([]);
 	const [viewImage, setViewImage] = useState("");
+	const [voting, setVoting] = useState(false);
+	const [logPage, setLogPage] = useState(false);
+	const [type, setType] = useState("new");
 
 	const handleView = async (id) => {
 		setView(true);
@@ -32,6 +38,20 @@ const contestents = () => {
 			console.log("fail to fetch images");
 		}
 	};
+
+	useEffect(() => {
+		const getSetting = async () => {
+			try {
+				const response = await axios.get("/api/settings/voting");
+				if (response) {
+					setVoting(response.data.status);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getSetting();
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -54,6 +74,41 @@ const contestents = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Navbar />
+			{logPage ? (
+				<section className="fixed translate-x-[-50%] border-2 border-white translate-y-[-50%] text-white bg-[#350200] top-[50%] left-[50%] md:w-1/2 h-[80vh] w-[90%]">
+					<div className="relative">
+						<AiFillCloseCircle
+							onClick={() => setLogPage(false)}
+							className="absolute right-1 top-1 hover:rotate-180 text-white hover:scale-110 transition-all duration-500 cursor-pointer"
+						/>
+					</div>
+					<div className="flex flex-col justify-around items-center mt-3">
+						<div className="flex w-full justify-around items-center mt-3">
+							<li
+								onClick={() => setType("new")}
+								className="list-none cursor-pointer"
+							>
+								Register
+							</li>
+							<li
+								onClick={() => setType("old")}
+								className="list-none cursor-pointer"
+							>
+								Login
+							</li>
+						</div>
+						<div className="relative h-1 w-full bg-slate-800">
+							<div
+								className={`w-[50%] transition-all duration-500 absolute h-1 bg-white ${
+									type === "new" ? "left-0" : "left-[50%]"
+								}`}
+							></div>
+						</div>
+						<Image src={logo} alt="logo" width={100} />
+					</div>
+					<div>{type === "old" ? <LoginUser /> : <RegisterUser />}</div>
+				</section>
+			) : null}
 			<div className="mt-1 uppercase py-2 text-white bg-[#350200] text-center">
 				contestents
 			</div>
@@ -70,11 +125,19 @@ const contestents = () => {
 								<p className="text-center">{item.name}</p>
 								{/* <button className="w-full text-center">Vote</button> */}
 								<button
-									className="w-full text-center"
+									className="w-full bg-[#350200] text-white hover:opacity-80 my-3 text-center"
 									onClick={() => handleView(item._id)}
 								>
 									View Details
 								</button>
+								{voting && (
+									<button
+										className="w-full bg-green-600 text-white hover:opacity-80 text-center"
+										onClick={() => setLogPage(true)}
+									>
+										Vote Now
+									</button>
+								)}
 							</div>
 						);
 					})}
@@ -168,6 +231,7 @@ const contestents = () => {
 					</div>
 				</motion.div>
 			) : null}
+
 			<Footer />
 		</>
 	);

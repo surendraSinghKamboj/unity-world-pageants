@@ -23,6 +23,18 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 8,
     },
+    admin: {
+        type: Boolean,
+        default: false
+    },
+    otp: {
+        type: Number,
+        default: Math.floor(100000 + Math.random() * 900000)
+    },
+    verified: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 
 

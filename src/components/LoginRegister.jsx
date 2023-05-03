@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Query from "./Query";
-import Login from "./Login";
+import Login from "./LoginUser";
 
 const LoginRegister = ({ close }) => {
 	const [part, setPart] = useState("register");

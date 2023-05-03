@@ -5,7 +5,7 @@ import axios from "axios";
 import Alert from "./Alert";
 import Image from "next/image";
 
-const Query = () => {
+const RegisterUser = () => {
 	const [text, setText] = useState("");
 	const [status, setStatus] = useState("Submit");
 
@@ -25,20 +25,19 @@ const Query = () => {
 	};
 
 	const handleSubmit = async () => {
-		console.log(data);
-		const { name, email, mobile, country, message } = data;
-		if (!name || !email || !mobile || !message || !country) {
+		const { name, email, mobile, country, password } = data;
+		if (!name || !email || !mobile || !password || !country) {
 			setText("All feildes are medatory");
 		} else if (mobile.length !== 10) {
 			setText("Please enter correct mobile number");
 		} else {
 			try {
 				setStatus("Sending");
-				const response = await axios.post(`/api/mail/query`, {
+				const response = await axios.post(`/api/users/register`, {
 					name,
 					email,
 					mobile: `+${country}-${mobile}`,
-					message,
+					password,
 				});
 				setStatus("Submit");
 				setText(response.data.message);
@@ -54,8 +53,7 @@ const Query = () => {
 	}, [text]);
 
 	return (
-		<>
-			<Image alt="logo" src={logo} width={100} className="mt-1" />
+		<div className="flex flex-col justify-center items-center">
 			<Alert text={text} />
 			{inputs &&
 				inputs.map(({ type, name, placeholder }, index) => (
@@ -87,21 +85,21 @@ const Query = () => {
 					</option>
 				))}
 			</select>
-			<textarea
-				name="message"
-				className="w-72 bg-slate-800 mt-2 px-2 border-white border-2"
-				placeholder="Message"
+			<input
+				type={"password"}
+				placeholder={"Enter Password"}
+				name={"password"}
 				onChange={(e) => handleChange(e)}
-				rows="5"
-			></textarea>
+				className="rounded-lg px-2 border-2 mt-2 border-white bg-slate-800 py-1 w-72"
+			/>
 			<button
 				className="mt-4 border-2 shadow-md shadow-white active:translate-y-1 active:shadow-none transition-all duration-500 px-4 rounded-md py-1 hover:opacity-80  hover:text-white"
 				onClick={handleSubmit}
 			>
 				{status}
 			</button>
-		</>
+		</div>
 	);
 };
 
-export default Query;
+export default RegisterUser;

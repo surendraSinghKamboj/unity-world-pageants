@@ -15,8 +15,8 @@ const handler = async (req, res) => {
                 res.status(400).json({ success: false, message: "Email-id or password is invailid" })
             }
 
-            const verifyPassword = bcrypt.compare(password, user.password)
-
+            const verifyPassword = await bcrypt.compare(password, user.password)
+            console.log(verifyPassword)
             if (!verifyPassword) {
                 return res.status(404).json({ success: false, message: "Email-id or password is invailid" })
             }

@@ -1,14 +1,38 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import axios from "axios";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { MdAdminPanelSettings } from "react-icons/md";
 
 const admin = () => {
+	const { push } = useRouter();
 	const [data, setData] = useState({});
+
 	const feilds = [
 		{ name: "email", placeholder: "Enter your email" },
 		{ name: "paasword", placeholder: "Enter your password" },
 	];
+
+	const handleChange = (e) => {
+		setData({
+			...data,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleSubmit = async () => {
+		try {
+			const response = await axios.post("/api/admin/login", { ...data });
+			if (response) {
+				console.log(response.data);
+				push("/admin/Dashboard");
+			}
+		} catch (error) {
+			console.log("there is any error");
+		}
+	};
+
 	return (
 		<div
 			style={{ backgroundImage: "url(/logo.png)" }}
@@ -27,11 +51,15 @@ const admin = () => {
 							type={name}
 							name={name}
 							placeholder={placeholder}
+							onChange={handleChange}
 							className="w-[80%] bg-slate-800 text-white border-2 border-white mt-3 rounded-xl px-3"
 						/>
 					);
 				})}
-				<button className="border-2 border-white px-3 text-white hover:opacity-80 rounded-xl mt-3">
+				<button
+					className="border-2 border-white px-3 text-white hover:opacity-80 rounded-xl mt-3"
+					onClick={handleSubmit}
+				>
 					Submit
 				</button>
 			</motion.div>

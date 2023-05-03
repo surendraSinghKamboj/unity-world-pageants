@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Alert from "./Alert";
 import axios from "axios";
 
-const Login = () => {
+const LoginUser = () => {
 	const [text, setText] = useState("");
 
 	const inputs = [
@@ -34,7 +34,7 @@ const Login = () => {
 				});
 				setText(response.data.message);
 			} catch (error) {
-				console.log(error);
+				setText(error.response.data.message);
 			}
 		}
 	};
@@ -44,7 +44,7 @@ const Login = () => {
 	}, [text]);
 
 	return (
-		<>
+		<div className="flex flex-col justify-center items-center">
 			<Alert text={text} />
 			{inputs &&
 				inputs.map(({ type, name, placeholder }, index) => (
@@ -54,17 +54,17 @@ const Login = () => {
 						placeholder={placeholder}
 						name={name}
 						onChange={(e) => handleChange(e)}
-						className="rounded-full px-2 border-2 mt-2 border-black py-1 w-72"
+						className="rounded-lg px-2 border-2 mt-2 border-white bg-slate-800 py-1 w-72"
 					/>
 				))}
 			<button
-				className="mt-4 border-2 border-[#350200] px-2 rounded-full hover:bg-green-500 hover:text-white"
+				className="mt-4 border-2 border-white px-2 rounded-full hover:bg-green-500 hover:text-white"
 				onClick={handleSubmit}
 			>
-				Login now
+				Login
 			</button>
-		</>
+		</div>
 	);
 };
 
-export default Login;
+export default LoginUser;
