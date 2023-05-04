@@ -51,7 +51,7 @@ const ContestantsCard = ({ data }) => {
 
 			<h3 className="text-white text-center">{name}</h3>
 			<div className="w-full flex justify-center">
-				<Link href={`/admin/updateContestants/${_id}`}>
+				<Link href={`/Dashboard/updateContestants/${_id}`}>
 					<button className="text-white rounded-xl border-2 bg-green-800 border-white hover:opacity-80 w-20 mt-2">
 						Update
 					</button>
