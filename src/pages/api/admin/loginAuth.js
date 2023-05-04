@@ -30,7 +30,7 @@ const handler = async (req, res) => {
                 const cookieSerialized = cookie.serialize('token', token, {
                     httpOnly: true,
                     maxAge: 43200000,
-                    path: '/admin',
+                    path: "/",
                 });
 
                 res.setHeader('Set-Cookie', cookieSerialized);

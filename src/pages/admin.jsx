@@ -32,9 +32,9 @@ const admin = () => {
 				body: JSON.stringify(data),
 			});
 			const result = await response.json();
-			if(result.status){
-				console.log(1)
-				push("/admin/Dashboard")
+			if (result.status) {
+				console.log(1);
+				push("/Dashboard");
 			}
 		} catch (error) {
 			console.error("Error:", error);
