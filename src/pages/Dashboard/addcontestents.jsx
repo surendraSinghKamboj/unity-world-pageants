@@ -7,8 +7,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { resetImage } from "../../../../Store/Features/Images";
-import { resetHobbies } from "../../../../Store/Features/incrementalStorage";
+import { resetImage } from "../../../Store/Features/Images";
+import { resetHobbies } from "../../../Store/Features/incrementalStorage";
 
 const addcontestents = () => {
 	const { push } = useRouter();
