@@ -2,13 +2,13 @@ import Users from "../../../../models/users";
 import connectDb from "../../../../middlewares/connectDb";
 import bcrypt from "bcrypt"
 import { sendToken } from "../../../../utils/token";
+import cookie from "cookie"
+
 
 const handler = async (req, res) => {
     if (req.method === "POST") {
         const { email, password } = req.body
-
         try {
-
             const user = await Users.findOne({ email })
 
             if (!user) {
@@ -16,15 +16,30 @@ const handler = async (req, res) => {
             }
 
             const verifyPassword = await bcrypt.compare(password, user.password)
-            console.log(verifyPassword)
+
             if (!verifyPassword) {
                 return res.status(404).json({ success: false, message: "Email-id or password is invailid" })
             }
 
-            sendToken(user, res, "Login Succussfully......", 200)
+            if (!user.admin) {
+                return res.status(404).json({ success: false, message: "You are not authorized" })
+            }
+            const token = sendToken(user);
+
+            if (token) {
+                const cookieSerialized = cookie.serialize('token', token, {
+                    httpOnly: true,
+                    maxAge: 43200000,
+                    path: '/admin',
+                });
+
+                res.setHeader('Set-Cookie', cookieSerialized);
+                return res.status(201).json({ status: true, message: 'Login successfully.' });
+
+            }
 
         } catch (error) {
-
+            console.log(error)
         }
     } else {
         res.status(404).json({ message: "Invalid request" })

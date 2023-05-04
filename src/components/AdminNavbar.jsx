@@ -8,13 +8,13 @@ const AdminNavbar = () => {
 				<h3 className="text-white text-xl">UWP admin</h3>
 			</Link>
 			<ul className="flex justify-start gap-3 text-white items center">
-				<Link href={"/admin/contestents"}>
+				<Link href={"/admin/Dashboard/contestents"}>
 					<li className="cursor-pointer hover:opacity-80">Contestants</li>
 				</Link>
-				<Link href={"/admin/addcontestents"}>
+				<Link href={"/admin/Dashboard/addcontestents"}>
 					<li className="cursor-pointer hover:opacity-80">Add contestents</li>
 				</Link>
-				<Link href={"/admin/votes"}>
+				<Link href={"/admin/Dashboard/votes"}>
 					<li className="cursor-pointer hover:opacity-80">Votes</li>
 				</Link>
 			</ul>

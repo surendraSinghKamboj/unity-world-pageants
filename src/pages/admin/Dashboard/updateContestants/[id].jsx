@@ -6,7 +6,7 @@ import axios from "axios";
 import Uploadimage from "@/components/Uploadimage";
 import HobbiesComponent from "@/components/adminComponents/Hobbies";
 import { useDispatch } from "react-redux";
-import { update } from "../../../../Store/Features/incrementalStorage";
+import { update } from "../../../../../Store/Features/incrementalStorage";
 import produce from "immer";
 
 const updateContestants = () => {

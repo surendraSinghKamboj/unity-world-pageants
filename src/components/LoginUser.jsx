@@ -35,6 +35,7 @@ const LoginUser = () => {
 				setText(response.data.message);
 			} catch (error) {
 				setText(error.response.data.message);
+				throw "email or password incorrect";
 			}
 		}
 	};

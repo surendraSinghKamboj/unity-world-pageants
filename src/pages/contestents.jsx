@@ -19,7 +19,7 @@ const contestents = () => {
 	const [viewData, setViewData] = useState({});
 	const [fetchedImages, setFetchedImages] = useState([]);
 	const [viewImage, setViewImage] = useState("");
-	const [voting, setVoting] = useState(false);
+	const [voting, setVoting] = useState(true);
 	const [logPage, setLogPage] = useState(false);
 	const [type, setType] = useState("new");
 
