@@ -25,7 +25,6 @@ const Query = () => {
 	};
 
 	const handleSubmit = async () => {
-		console.log(data);
 		const { name, email, mobile, country, message } = data;
 		if (!name || !email || !mobile || !message || !country) {
 			setText("All feildes are medatory");
@@ -44,7 +43,6 @@ const Query = () => {
 				setText(response.data.message);
 			} catch (error) {
 				setStatus("Submit");
-				console.log("error");
 			}
 		}
 	};

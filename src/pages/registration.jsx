@@ -11,6 +11,7 @@ import Head from "next/head";
 import { seoDescription } from "@/websitecontent/content";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ToastContainer, toast } from "react-toastify";
 
 const registration = () => {
 	const images = useSelector((result) => result.updateImages);
@@ -45,8 +46,10 @@ const registration = () => {
 					try {
 						setStatus("Sending");
 						const { data } = await axios.post("/api/mail/register", readyData);
-						data ? console.log(data) : null;
 						setStatus("Submit");
+						if (data) {
+							toast.success("Details Sent succeddfully.");
+						}
 					} catch (error) {
 						setStatus("Submit");
 					}
@@ -68,6 +71,7 @@ const registration = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Navbar />
+			<ToastContainer />
 			<div className="flex flex-col bg-[#350200] m-auto py-4 justify-center items-center w-full ">
 				{terms ? <Terms close={setTerms} /> : null}
 				<h3 className="mt-4 mb-10 text-white">Entry Form</h3>
