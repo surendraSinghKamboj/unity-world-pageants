@@ -48,7 +48,7 @@ const registration = () => {
 						const { data } = await axios.post("/api/mail/register", readyData);
 						setStatus("Submit");
 						if (data) {
-							toast.success("Details Sent succeddfully.");
+							toast.success("Details Sent Successfully.");
 						}
 					} catch (error) {
 						setStatus("Submit");
