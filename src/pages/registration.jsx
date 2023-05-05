@@ -52,6 +52,7 @@ const registration = () => {
 						}
 					} catch (error) {
 						setStatus("Submit");
+						toast.error("Please Try again.")
 					}
 				}
 			} else {
