@@ -28,7 +28,7 @@ const LoginUser = () => {
 			setText("All feilds are mandatory");
 		} else {
 			try {
-				const response = await axios.post("/api/users/login", {
+				const response = await axios.post("/api/users/loginAuth", {
 					email,
 					password,
 				});

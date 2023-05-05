@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import uniqid from 'uniqid'
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -27,9 +28,9 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    otp: {
-        type: Number,
-        default: Math.floor(100000 + Math.random() * 900000)
+    verificationId: {
+        type: String,
+        default: uniqid()
     },
     verified: {
         type: Boolean,

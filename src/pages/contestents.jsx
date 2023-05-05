@@ -39,6 +39,20 @@ const contestents = () => {
 		}
 	};
 
+	const voteNow = async (id) => {
+		console.log(id);
+		try {
+			const response = await axios.post(`/api/contestents/votes`, { id });
+			if (response?.response?.status) console.log(response.response.status);
+			if (response.data) {
+				console.log(response.data);
+			}
+		} catch (error) {
+			// console.log("error: ", error);
+			setLogPage(true);
+		}
+	};
+
 	useEffect(() => {
 		const getSetting = async () => {
 			try {
@@ -133,7 +147,10 @@ const contestents = () => {
 								{voting && (
 									<button
 										className="w-full bg-green-600 text-white hover:opacity-80 text-center"
-										onClick={() => setLogPage(true)}
+										onClick={() => {
+											voteNow(item._id);
+											// setLogPage(true);
+										}}
 									>
 										Vote Now
 									</button>

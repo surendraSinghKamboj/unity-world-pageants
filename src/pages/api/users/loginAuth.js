@@ -7,7 +7,7 @@ import cookie from "cookie"
 const handler = async (req, res) => {
     if (req.method === "POST") {
         const { email, password } = req.body
-
+        console.log(email, password)
         try {
 
             const user = await Users.findOne({ email })
@@ -28,6 +28,7 @@ const handler = async (req, res) => {
                 const cookieSerialized = cookie.serialize("token", token, {
                     httpOnly: true,
                     maxAge: 43200000,
+                    path: "/"
                 });
                 res.setHeader('Set-Cookie', cookieSerialized);
                 return res.status(201).json({ status: true, message: "Login successfully." })
