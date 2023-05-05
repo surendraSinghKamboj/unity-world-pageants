@@ -17,7 +17,6 @@ async function sendEmail(req, res) {
 
   if (req.method === "POST") {
     try {
-      await axios.post(`${process.env.DOMAIN_NAME}/api/queries/query`, { name, email, mobile, message });
       const info = await transporter.sendMail({
         from: process.env.USER_E_MAIL,
         to: process.env.RECIVE_E_MAIL,

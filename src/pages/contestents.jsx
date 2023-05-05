@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import LoginUser from "@/components/LoginUser";
 import RegisterUser from "@/components/RegisterUser";
+import { ToastContainer, toast } from "react-toastify";
 
 const contestents = () => {
 	const [data, setData] = useState([]);
@@ -40,15 +41,18 @@ const contestents = () => {
 	};
 
 	const voteNow = async (id) => {
-		console.log(id);
 		try {
 			const response = await axios.post(`/api/contestents/votes`, { id });
 			if (response?.response?.status) console.log(response.response.status);
 			if (response.data) {
-				console.log(response.data);
+				const mesg = response.data.message;
+				if (mesg === "Voting successfull.") {
+					toast.success(response.data.message);
+				} else {
+					toast.info(response.data.message);
+				}
 			}
 		} catch (error) {
-			// console.log("error: ", error);
 			setLogPage(true);
 		}
 	};
@@ -88,6 +92,7 @@ const contestents = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Navbar />
+			<ToastContainer />
 			{logPage ? (
 				<section className="fixed translate-x-[-50%] border-2 border-white translate-y-[-50%] text-white bg-[#350200] top-[50%] left-[50%] md:w-1/2 h-[80vh] w-[90%]">
 					<div className="relative">

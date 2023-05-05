@@ -8,7 +8,7 @@ export const isAuth = async (token, res, Users) => {
     try {
         const user = await Users.findById(decode._id)
         if (user) {
-            return true
+            return user
         }
     } catch (error) {
         return res.status(300).json({ status: false })

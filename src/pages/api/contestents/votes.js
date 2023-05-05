@@ -9,15 +9,24 @@ const handler = async (req, res) => {
         const token = req.cookies.token
         const { id } = req.body
         if (!token) {
-            return res.status(300).json({message:"User unAuthorized"})
+            return res.status(300).json({ message: "User unAuthorized" })
         }
         try {
-            const re = await isAuth(token, res, Users)
-            console.log(re)
-
-            const response = await contestants.findOneAndUpdate({ _id: id }, { $inc: { votes: 1 } })
-            if (response) {
-                res.status(200).json({ message: "Voting successfull......" })
+            const user = await isAuth(token, res, Users)
+            if (user) {
+                if (user.verified) {
+                    if (user.voted) {
+                        return res.status(200).json({ message: "Already Voted." })
+                    } else {
+                        const update = await Users.findOneAndUpdate({ _id: user.id }, { voted: true })
+                        const response = await contestants.findOneAndUpdate({ _id: id }, { $inc: { votes: 1 } })
+                        if (response) {
+                            return res.status(200).json({ message: "Voting successfull." })
+                        }
+                    }
+                } else {
+                    return res.status(200).json({ message: "Please check your email and verify your email." })
+                }
             }
         } catch (error) {
             return res.status(401).json({ message: "Error while voting....." })
