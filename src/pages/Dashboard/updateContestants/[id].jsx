@@ -4,15 +4,21 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Uploadimage from "@/components/Uploadimage";
-import HobbiesComponent from "@/components/adminComponents/Hobbies";
-import { useDispatch } from "react-redux";
-import { update } from "../../../../../Store/Features/incrementalStorage";
-import produce from "immer";
+import { useDispatch, useSelector } from "react-redux";
+import Head from "next/head";
+import AdminNavbar from "@/components/AdminNavbar";
 
 const updateContestants = () => {
 	const dispatch = useDispatch();
+	const { imgOne, imgTwo, imgThree } = useSelector(
+		(result) => result.updateImages
+	);
 	const router = useRouter();
 	const [data, setData] = useState({});
+	const [hobbies, setHobbies] = useState();
+	const [awards, setAwards] = useState();
+
+	console.log(data);
 
 	useEffect(() => {
 		const getContestant = async (id) => {
@@ -22,6 +28,8 @@ const updateContestants = () => {
 				);
 				if (response) {
 					setData(response.data.response);
+					setAwards(response.data.response.awards);
+					setHobbies(response.data.response.hobbies);
 				}
 			} catch (error) {
 				console.error(error);
@@ -30,16 +38,23 @@ const updateContestants = () => {
 		getContestant(router.query.id);
 	}, [router.query.id]);
 
-	const handleUpdate = () => {
-		if (data.hobbies) {
-			setData(
-				produce(data, (draft) => {
-					draft.hobbies = data.hobbies;
-					draft.awards = data.awards;
-				})
-			);
+	useEffect(() => {
+		if (hobbies) {
+			setData({
+				...data,
+				hobbies: hobbies.join(", "),
+			});
 		}
-	};
+	}, [hobbies]);
+
+	useEffect(() => {
+		if (awards) {
+			setData({
+				...data,
+				awards: awards.join(", "),
+			});
+		}
+	}, [awards]);
 
 	const feilds = [
 		{ type: "text", name: "name", placeholder: "Enter Name" },
@@ -57,6 +72,16 @@ const updateContestants = () => {
 			name: "reasonForEnteringPageant",
 			placeholder: "Reason for entering Pagent",
 		},
+		{
+			type: "text",
+			name: "hobbies",
+			placeholder: "Hobbies please seprate by comma(,)",
+		},
+		{
+			type: "text",
+			name: "awards",
+			placeholder: "Awards please seprate by comma(,)",
+		},
 	];
 
 	const handleChange = (e) => {
@@ -66,11 +91,35 @@ const updateContestants = () => {
 		});
 	};
 
+	const handleSubmit = async () => {
+		const images = [imgOne, imgTwo, imgThree];
+		const { hobbies } = data.hobbies;
+		const { awards } = data.awards;
+		console.log(hobbies, awards);
+		setData({
+			...data,
+			images,
+			hobbies,
+			awards,
+		});
+		try {
+			const response = await axios.put("/api/contestents/update", data);
+			if (response) {
+				router.push("/Dashboard");
+			}
+		} catch (error) {
+			throw error;
+		}
+	};
+
 	return (
 		<div>
-			<button onClick={handleUpdate}>Update</button>
+			<Head>
+				<title>{data.name} || Update</title>
+			</Head>
+			<AdminNavbar />
 			<Uploadimage fetched={data.images} />
-			<div>
+			<div className="md:w-[70%] m-auto py-5 rounded-2xl bg-[#350200] flex flex-col justify-center items-center">
 				{feilds.map(({ type, name, placeholder }, index) => (
 					<input
 						key={index}
@@ -91,6 +140,10 @@ const updateContestants = () => {
 								? data.volunteerCharityProject
 								: name === "reasonForEnteringPageant"
 								? data.reasonForEnteringPageant
+								: name === "hobbies"
+								? data.hobbies
+								: name === "awards"
+								? data.awards
 								: null
 						}
 						placeholder={placeholder}
@@ -98,10 +151,13 @@ const updateContestants = () => {
 						className="w-[80%] bg-slate-800 text-white px-2 my-2 border-2 border-white rounded-xl"
 					/>
 				))}
-				<div>
-					<HobbiesComponent title={"Hobbies"} />
-					<HobbiesComponent title={"Awards"} />
-				</div>
+
+				<button
+					onClick={handleSubmit}
+					className="border-2 rounded-lg border-white bg-green-600 hover:opacity-80 cursor-pointer px-2 text-white"
+				>
+					Update
+				</button>
 			</div>
 		</div>
 	);

@@ -41,7 +41,17 @@ const handler = async (req, res) => {
         } catch (error) {
             console.log(error)
         }
-    } else {
+    } else if (req.method === "GET") {
+        const cookieSerialized = cookie.serialize('token', "token", {
+            httpOnly: true,
+            maxAge: 0,
+            path: "/",
+        });
+
+        res.setHeader('Set-Cookie', cookieSerialized);
+        return res.status(200).json({ status: true, message: 'Logout successfully.' });
+    }
+    else {
         res.status(404).json({ message: "Invalid request" })
     }
 }

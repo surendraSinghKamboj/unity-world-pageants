@@ -10,7 +10,7 @@ const Store = configureStore({
         title,
         hobbies,
     },
-    // devTools:false
+    devTools:false
 })
 
 
