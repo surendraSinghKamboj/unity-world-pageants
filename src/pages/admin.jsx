@@ -33,7 +33,6 @@ const admin = () => {
 			});
 			const result = await response.json();
 			if (result.status) {
-				console.log(1);
 				push("/Dashboard");
 			}
 		} catch (error) {

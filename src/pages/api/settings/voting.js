@@ -1,14 +1,22 @@
 import connectDb from "../../../../middlewares/connectDb";
 import setting from "../../../../models/settings";
+import Users from "../../../../models/users";
+import { isAdminAuth } from "../../../../middlewares/isAdminAuth";
 
 const handler = async (req, res) => {
     if (req.method === "POST") {
+        const adminToken = req.cookies.adminToken
         try {
-            const response = await setting.findOne({ _id: "6450e5eb8343a880473b2d02" })
-            if (response) {
-                const update = await setting.findOneAndUpdate({ _id: "6450e5eb8343a880473b2d02" }, { voting: !response.voting })
-                if (update) {
-                    return res.status(202).json({ status: true, message: "Setting Changed users can vote now." })
+            const result = await isAdminAuth(Users, res, adminToken)
+
+            if (result) {
+
+                const response = await setting.findOne({ _id: process.env.VOTING_ID })
+                if (response) {
+                    const update = await setting.findOneAndUpdate({ _id: process.env.VOTING_ID }, { voting: !response.voting })
+                    if (update) {
+                        return res.status(202).json({ status: true, message: "Setting Changed users can vote now." })
+                    }
                 }
             }
         } catch (error) {
@@ -16,7 +24,7 @@ const handler = async (req, res) => {
         }
     } else if (req.method === "GET") {
         try {
-            const response = await setting.findOne({ _id: "6450e5eb8343a880473b2d02" })
+            const response = await setting.findOne({ _id: process.env.VOTING_ID })
             if (response) {
                 res.status(200).json({ status: response.voting })
             }

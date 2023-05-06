@@ -27,7 +27,7 @@ const Setting = () => {
 				setNumberr(Math.random());
 			}
 		} catch (error) {
-			console.log("failed");
+			console.log("failed", error);
 		}
 	};
 	return (

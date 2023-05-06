@@ -27,7 +27,7 @@ const handler = async (req, res) => {
             const token = sendToken(user);
 
             if (token) {
-                const cookieSerialized = cookie.serialize('token', token, {
+                const cookieSerialized = cookie.serialize('adminToken', token, {
                     httpOnly: true,
                     maxAge: 43200000,
                     path: "/",
@@ -42,7 +42,7 @@ const handler = async (req, res) => {
             console.log(error)
         }
     } else if (req.method === "GET") {
-        const cookieSerialized = cookie.serialize('token', "token", {
+        const cookieSerialized = cookie.serialize('adminToken', "token", {
             httpOnly: true,
             maxAge: 0,
             path: "/",

@@ -1,9 +1,11 @@
 import connectDb from "../../../../middlewares/connectDb";
 import contestants from "../../../../models/contestants";
-
+import Users from "../../../../models/users";
+import { isAdminAuth } from "../../../../middlewares/isAdminAuth";
 
 const handler = async (req, res) => {
     if (req.method === "PUT") {
+        const adminToken = req.cookies.adminToken
         const {
             _id,
             name,
@@ -19,23 +21,27 @@ const handler = async (req, res) => {
             volunteerCharityProject
         } = req.body
         try {
-            const response = await contestants.findOneAndUpdate({ _id }, {
-                name,
-                title,
-                age,
-                occupation,
-                height,
-                hobbies,
-                awards,
-                biography,
-                images,
-                image: images[0],
-                reasonForEnteringPageant,
-                volunteerCharityProject
-            })
+            const result = await isAdminAuth(Users, res, adminToken)
 
-            if (response) {
-                return res.status(201).json({ message: "Conetstent Saved Successfully", response })
+            if (result) {
+                const response = await contestants.findOneAndUpdate({ _id }, {
+                    name,
+                    title,
+                    age,
+                    occupation,
+                    height,
+                    hobbies,
+                    awards,
+                    biography,
+                    images,
+                    image: images[0],
+                    reasonForEnteringPageant,
+                    volunteerCharityProject
+                })
+
+                if (response) {
+                    return res.status(201).json({ message: "Conetstent Saved Successfully", response })
+                }
             }
         } catch (error) {
             console.log(error)
