@@ -4,8 +4,9 @@ import logo from "../assets/logo.png";
 import axios from "axios";
 import Alert from "./Alert";
 import Image from "next/image";
+import Loading from "./Loading";
 
-const Query = () => {
+const Query = ({ close }) => {
 	const [text, setText] = useState("");
 	const [status, setStatus] = useState("Submit");
 
@@ -41,6 +42,7 @@ const Query = () => {
 				});
 				setStatus("Submit");
 				setText(response.data.message);
+				setTimeout(() => close(false), 2000);
 			} catch (error) {
 				setStatus("Submit");
 			}
@@ -55,6 +57,7 @@ const Query = () => {
 		<>
 			<Image alt="logo" src={logo} width={100} className="mt-1" />
 			<Alert text={text} />
+			{status === "Sending" ? <Loading /> : null}
 			{inputs &&
 				inputs.map(({ type, name, placeholder }, index) => (
 					<input

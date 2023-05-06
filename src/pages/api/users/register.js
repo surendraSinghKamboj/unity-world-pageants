@@ -3,6 +3,7 @@ import connectDb from "../../../../middlewares/connectDb";
 import { sendToken } from "../../../../utils/token";
 import bcrypt from "bcrypt"
 import cookie from "cookie"
+import axios from "axios";
 
 const handler = async (req, res) => {
     if (req.method === "POST") {
@@ -35,14 +36,21 @@ const handler = async (req, res) => {
             });
 
             const token = sendToken(user)
-
-            if (token) {
-                const cookieSerialized = cookie.serialize("token", token, {
-                    httpOnly: true,
-                    maxAge: 43200000,
-                });
-                res.setHeader('Set-Cookie', cookieSerialized);
-                res.status(201).json({ status: true, message: "Account created successfully." })
+            const verification = await axios.post(`${process.env.DOMAIN_NAME}/api/mail/verificationMail`, {
+                email: user.email,
+                ide: user._id,
+                pde: user.verificationId,
+                name: user.name
+            })
+            if (verification) {
+                if (token) {
+                    const cookieSerialized = cookie.serialize("token", token, {
+                        httpOnly: true,
+                        maxAge: 43200000,
+                    });
+                    res.setHeader('Set-Cookie', cookieSerialized);
+                    res.status(201).json({ status: true, message: "Account created successfully." })
+                }
             }
         } catch (error) {
             console.error("Accout Creatation failed: ", error);

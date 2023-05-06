@@ -125,7 +125,7 @@ const contestents = () => {
 						</div>
 						<Image src={logo} alt="logo" width={100} />
 					</div>
-					<div>{type === "old" ? <LoginUser /> : <RegisterUser />}</div>
+					<div>{type === "old" ? <LoginUser /> : <RegisterUser switcher={setLogPage} />}</div>
 				</section>
 			) : null}
 			<div className="mt-1 uppercase py-2 text-white bg-[#350200] text-center">

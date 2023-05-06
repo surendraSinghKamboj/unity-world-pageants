@@ -5,7 +5,7 @@ import axios from "axios";
 import Alert from "./Alert";
 import Image from "next/image";
 
-const RegisterUser = () => {
+const RegisterUser = ({ switcher }) => {
 	const [text, setText] = useState("");
 	const [status, setStatus] = useState("Submit");
 
@@ -41,6 +41,9 @@ const RegisterUser = () => {
 				});
 				setStatus("Submit");
 				setText(response.data.message);
+				if (response.data.message === "Account created successfully.") {
+					switcher("old");
+				}
 			} catch (error) {
 				setStatus("Submit");
 				console.log("error");

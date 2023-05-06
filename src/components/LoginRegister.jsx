@@ -34,7 +34,7 @@ const LoginRegister = ({ close }) => {
 						} h-1 bg-[#920f0a]`}
 					></div> */}
 				</div>
-				{part === "register" ? <Query /> : <Login />}
+				{part === "register" ? <Query close={close} /> : <Login />}
 			</div>
 		</div>
 	);
