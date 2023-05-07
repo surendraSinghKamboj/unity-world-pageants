@@ -14,8 +14,8 @@ import LoginUser from "@/components/LoginUser";
 import RegisterUser from "@/components/RegisterUser";
 import { ToastContainer, toast } from "react-toastify";
 
-const contestents = () => {
-	const [data, setData] = useState([]);
+const contestents = ({ data }) => {
+	// const [data, setData] = useState([]);
 	const [view, setView] = useState(false);
 	const [viewData, setViewData] = useState({});
 	const [fetchedImages, setFetchedImages] = useState([]);
@@ -57,19 +57,19 @@ const contestents = () => {
 		}
 	};
 
-	useEffect(() => {
-		const getSetting = async () => {
-			try {
-				const response = await axios.get("/api/settings/voting");
-				if (response) {
-					setVoting(response.data.status);
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		getSetting();
-	}, []);
+	// useEffect(() => {
+	// 	const getSetting = async () => {
+	// 		try {
+	// 			const response = await axios.get("/api/settings/voting");
+	// 			if (response) {
+	// 				setVoting(response.data.status);
+	// 			}
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	};
+	// 	getSetting();
+	// }, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -125,7 +125,13 @@ const contestents = () => {
 						</div>
 						<Image src={logo} alt="logo" width={100} />
 					</div>
-					<div>{type === "old" ? <LoginUser /> : <RegisterUser switcher={setLogPage} />}</div>
+					<div>
+						{type === "old" ? (
+							<LoginUser />
+						) : (
+							<RegisterUser switcher={setLogPage} />
+						)}
+					</div>
 				</section>
 			) : null}
 			<div className="mt-1 uppercase py-2 text-white bg-[#350200] text-center">
@@ -257,6 +263,29 @@ const contestents = () => {
 			<Footer />
 		</>
 	);
+};
+
+export const getServerSideProps = async () => {
+	try {
+		console.log("first");
+		const response = await fetch(
+			`${process.env.DOMAIN_NAME}/api/contestents/toClient`
+		);
+		if (!response.ok) {
+			throw new Error("Network response was not ok");
+		}
+		const data = await response.json();
+		return {
+			props: {
+				data,
+			},
+		};
+	} catch (error) {
+		console.error(error);
+		return {
+			notFound: true,
+		};
+	}
 };
 
 export default contestents;
