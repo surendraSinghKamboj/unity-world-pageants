@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[765],{233:function(n,u,t){(window.__NEXT_P=window.__NEXT_P||[]).push(["/logout",function(){return t(3622)}])},3622:function(n,u,t){"use strict";t.r(u);var _=t(5893);t(7294);let o=()=>(0,_.jsx)("div",{children:"logout"});u.default=o}},function(n){n.O(0,[774,888,179],function(){return n(n.s=233)}),_N_E=n.O()}]);

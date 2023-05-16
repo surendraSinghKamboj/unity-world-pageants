@@ -1,0 +1,29 @@
+{
+  "sortedMiddleware": [
+    "/"
+  ],
+  "middleware": {
+    "/": {
+      "env": [
+        "DOMAIN_NAME",
+        "ADMIN_KEY"
+      ],
+      "files": [
+        "server/edge-runtime-webpack.js",
+        "server/src/middleware.js"
+      ],
+      "name": "src/middleware",
+      "page": "/",
+      "matchers": [
+        {
+          "regexp": "^/.*$",
+          "originalSource": "/:path*"
+        }
+      ],
+      "wasm": [],
+      "assets": []
+    }
+  },
+  "functions": {},
+  "version": 2
+}
