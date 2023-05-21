@@ -1,14 +1,6 @@
 import connectDb from "../../../../middlewares/connectDb";
 import contestants from "../../../../models/contestants";
 
-export const config = {
-
-    runtime:"edge"
-
-}
-
-
-
 
 const handler = async (req, res) => {
     if (req.method === "GET") {
@@ -24,7 +16,3 @@ const handler = async (req, res) => {
 }
 
 export default connectDb(handler)
-
-
-
-
