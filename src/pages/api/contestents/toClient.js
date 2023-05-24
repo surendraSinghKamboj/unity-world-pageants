@@ -1,6 +1,7 @@
 import connectDb from "../../../../middlewares/connectDb";
 import contestants from "../../../../models/contestants";
 
+
 const handler = async (req, res) => {
     if (req.method === "GET") {
         try {
